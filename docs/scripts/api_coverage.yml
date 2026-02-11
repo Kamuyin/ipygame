@@ -1,0 +1,2525 @@
+meta:
+  title: API Coverage
+  description: Overview
+  last_updated: February 11, 2026
+sections:
+- title: Core Module (pygame)
+  table_label: Function
+  items:
+  - key: pygame.init
+    label: pygame.init()
+    status: implemented
+    notes: Returns (6, 0) tuple
+  - key: pygame.quit
+    label: pygame.quit()
+    status: implemented
+    notes: Cleans up backend state
+  - key: pygame.get_init
+    label: pygame.get_init()
+    status: implemented
+    notes: Returns initialization status
+  - key: pygame.error
+    label: pygame.error
+    status: implemented
+    notes: Exception class compatible with pygame
+  - key: pygame.get_error
+    label: pygame.get_error()
+    status: not_implemented
+    notes: SDL error retrieval not applicable
+  - key: pygame.set_error
+    label: pygame.set_error()
+    status: not_implemented
+    notes: SDL error setting not applicable
+  - key: pygame.get_sdl_version
+    label: pygame.get_sdl_version()
+    status: not_implemented
+    notes: No SDL in ipygame
+  - key: pygame.get_sdl_byteorder
+    label: pygame.get_sdl_byteorder()
+    status: not_implemented
+    notes: No SDL in ipygame
+  - key: pygame.register_quit
+    label: pygame.register_quit()
+    status: not_implemented
+    notes: Quit callback registration
+  - key: pygame.encode_string
+    label: pygame.encode_string()
+    status: not_implemented
+    notes: String encoding utility
+  - key: pygame.encode_file_path
+    label: pygame.encode_file_path()
+    status: not_implemented
+    notes: Path encoding utility
+- title: pygame.display
+  table_label: Function
+  items:
+  - key: display.init
+    label: display.init()
+    status: implemented
+    notes: Initializes display module
+  - key: display.quit
+    label: display.quit()
+    status: implemented
+    notes: Uninitializes display, clears canvas
+  - key: display.get_init
+    label: display.get_init()
+    status: implemented
+    notes: Returns init status
+  - key: display.set_mode
+    label: display.set_mode(size, flags, depth, display, vsync)
+    status: implemented
+    notes: Creates ipycanvas Canvas widget
+  - key: display.get_surface
+    label: display.get_surface()
+    status: implemented
+    notes: Returns current display Surface
+  - key: display.flip
+    label: display.flip()
+    status: implemented
+    notes: Updates entire display to canvas
+  - key: display.update
+    label: display.update(rectangle)
+    status: implemented
+    notes: Updates display (currently full screen)
+  - key: display.get_driver
+    label: display.get_driver()
+    status: not_implemented
+    notes: Returns "ipycanvas"
+  - key: display.Info
+    label: display.Info()
+    status: not_implemented
+    notes: Returns basic info object
+  - key: display.get_wm_info
+    label: display.get_wm_info()
+    status: not_implemented
+    notes: Window manager info not applicable
+  - key: display.get_desktop_sizes
+    label: display.get_desktop_sizes()
+    status: not_implemented
+    notes: Multi-monitor support N/A
+  - key: display.list_modes
+    label: display.list_modes(depth, flags, display)
+    status: not_implemented
+    notes: Mode enumeration N/A
+  - key: display.mode_ok
+    label: display.mode_ok(size, flags, depth)
+    status: not_implemented
+    notes: Mode validation N/A
+  - key: display.gl_get_attribute
+    label: display.gl_get_attribute(flag)
+    status: not_implemented
+    notes: OpenGL not supported
+  - key: display.gl_set_attribute
+    label: display.gl_set_attribute(flag, value)
+    status: not_implemented
+    notes: OpenGL not supported
+  - key: display.get_active
+    label: display.get_active()
+    status: not_implemented
+    notes: Window focus state
+  - key: display.iconify
+    label: display.iconify()
+    status: not_implemented
+    notes: Stub (no effect in Jupyter)
+  - key: display.toggle_fullscreen
+    label: display.toggle_fullscreen()
+    status: not_implemented
+    notes: Stub (no effect in Jupyter)
+  - key: display.set_gamma
+    label: display.set_gamma(red, green, blue)
+    status: not_implemented
+    notes: Gamma correction N/A
+  - key: display.set_gamma_ramp
+    label: display.set_gamma_ramp(red, green, blue)
+    status: not_implemented
+    notes: Gamma ramp N/A
+  - key: display.set_icon
+    label: display.set_icon(surface)
+    status: not_implemented
+    notes: Stored but not displayed
+  - key: display.set_caption
+    label: display.set_caption(title, icontitle)
+    status: implemented
+    notes: Stores caption string
+  - key: display.get_caption
+    label: display.get_caption()
+    status: implemented
+    notes: Returns caption tuple
+  - key: display.set_palette
+    label: display.set_palette(palette)
+    status: not_implemented
+    notes: Palette mode not used
+  - key: display.get_num_displays
+    label: display.get_num_displays()
+    status: not_implemented
+    notes: Multi-display N/A
+  - key: display.get_window_size
+    label: display.get_window_size()
+    status: implemented
+    notes: Returns canvas dimensions
+  - key: display.get_allow_screensaver
+    label: display.get_allow_screensaver()
+    status: not_implemented
+    notes: Screensaver control N/A
+  - key: display.set_allow_screensaver
+    label: display.set_allow_screensaver(bool)
+    status: not_implemented
+    notes: Screensaver control N/A
+  - key: display.is_fullscreen
+    label: display.is_fullscreen()
+    status: not_implemented
+    notes: Fullscreen state N/A
+- title: pygame.Surface
+  table_label: Method
+  items:
+  - key: Surface
+    label: Surface(size, flags, depth)
+    status: implemented
+    notes: Creates RGBA surface with numpy backend
+  - key: Surface
+    label: Surface(size, flags, surface)
+    status: implemented
+    notes: Creates surface matching another
+  - key: blit
+    label: blit(source, dest, area, special_flags)
+    status: implemented
+    notes: Blits with alpha blending
+  - key: blits
+    label: blits(sequence, doreturn)
+    status: implemented
+    notes: Multiple blits
+  - key: fblits
+    label: fblits(sequence, doreturn)
+    status: not_implemented
+    notes: Fast blits without return
+  - key: convert
+    label: convert(surface)
+    status: implemented
+    notes: Converts format (returns self, already RGBA)
+  - key: convert_alpha
+    label: convert_alpha(surface)
+    status: implemented
+    notes: Converts to alpha format
+  - key: copy
+    label: copy()
+    status: implemented
+    notes: Creates surface copy
+  - key: fill
+    label: fill(color, rect, special_flags)
+    status: implemented
+    notes: Fills with solid color
+  - key: scroll
+    label: scroll(dx, dy)
+    status: not_implemented
+    notes: Surface scrolling
+  - key: set_colorkey
+    label: set_colorkey(color, flags)
+    status: implemented
+    notes: Sets transparent color
+  - key: get_colorkey
+    label: get_colorkey()
+    status: implemented
+    notes: Returns colorkey
+  - key: set_alpha
+    label: set_alpha(value, flags)
+    status: implemented
+    notes: Sets surface alpha
+  - key: get_alpha
+    label: get_alpha()
+    status: implemented
+    notes: Returns surface alpha
+  - key: lock
+    label: lock()
+    status: implemented
+    notes: Locks surface (reference counting)
+  - key: unlock
+    label: unlock()
+    status: implemented
+    notes: Unlocks surface
+  - key: mustlock
+    label: mustlock()
+    status: implemented
+    notes: Always returns False
+  - key: get_locked
+    label: get_locked()
+    status: implemented
+    notes: Returns lock status
+  - key: get_locks
+    label: get_locks()
+    status: implemented
+    notes: Returns lock tuple
+  - key: get_at
+    label: get_at(pos)
+    status: implemented
+    notes: Gets pixel Color
+  - key: set_at
+    label: set_at(pos, color)
+    status: implemented
+    notes: Sets pixel color
+  - key: get_at_mapped
+    label: get_at_mapped(pos)
+    status: not_implemented
+    notes: Returns RGBA tuple as int
+  - key: get_palette
+    label: get_palette()
+    status: not_implemented
+    notes: No palette mode
+  - key: get_palette_at
+    label: get_palette_at(index)
+    status: not_implemented
+    notes: No palette mode
+  - key: set_palette
+    label: set_palette(palette)
+    status: not_implemented
+    notes: No palette mode
+  - key: set_palette_at
+    label: set_palette_at(index, color)
+    status: not_implemented
+    notes: No palette mode
+  - key: map_rgb
+    label: map_rgb(color)
+    status: implemented
+    notes: Maps color to pixel value
+  - key: unmap_rgb
+    label: unmap_rgb(mapped_int)
+    status: implemented
+    notes: Unmaps pixel to Color
+  - key: set_clip
+    label: set_clip(rect)
+    status: implemented
+    notes: Sets clipping rectangle
+  - key: get_clip
+    label: get_clip()
+    status: implemented
+    notes: Gets clipping rectangle
+  - key: subsurface
+    label: subsurface(rect)
+    status: implemented
+    notes: Creates subsurface view
+  - key: get_parent
+    label: get_parent()
+    status: implemented
+    notes: Returns parent surface
+  - key: get_abs_parent
+    label: get_abs_parent()
+    status: implemented
+    notes: Returns root parent
+  - key: get_offset
+    label: get_offset()
+    status: implemented
+    notes: Returns subsurface offset
+  - key: get_abs_offset
+    label: get_abs_offset()
+    status: implemented
+    notes: Returns absolute offset
+  - key: get_size
+    label: get_size()
+    status: implemented
+    notes: Returns (width, height)
+  - key: get_width
+    label: get_width()
+    status: implemented
+    notes: Returns width
+  - key: get_height
+    label: get_height()
+    status: implemented
+    notes: Returns height
+  - key: get_rect
+    label: get_rect(**kwargs)
+    status: implemented
+    notes: Returns Rect with size
+  - key: get_frect
+    label: get_frect(**kwargs)
+    status: implemented
+    notes: Returns FRect with size
+  - key: get_bitsize
+    label: get_bitsize()
+    status: implemented
+    notes: Returns 32
+  - key: get_bytesize
+    label: get_bytesize()
+    status: implemented
+    notes: Returns 4
+  - key: get_flags
+    label: get_flags()
+    status: implemented
+    notes: Returns surface flags
+  - key: get_pitch
+    label: get_pitch()
+    status: implemented
+    notes: Returns bytes per row
+  - key: get_masks
+    label: get_masks()
+    status: implemented
+    notes: Returns RGBA masks
+  - key: get_shifts
+    label: get_shifts()
+    status: implemented
+    notes: Returns RGBA shifts
+  - key: get_losses
+    label: get_losses()
+    status: implemented
+    notes: Returns (0,0,0,0)
+  - key: get_bounding_rect
+    label: get_bounding_rect(min_alpha)
+    status: implemented
+    notes: Returns bounding rect of non-transparent pixels
+  - key: get_view
+    label: get_view(kind)
+    status: not_implemented
+    notes: Buffer view access
+  - key: get_buffer
+    label: get_buffer()
+    status: not_implemented
+    notes: Raw buffer access
+  - key: _pixels_address
+    label: _pixels_address
+    status: not_implemented
+    notes: Memory address (not applicable)
+  - key: premul_alpha
+    label: premul_alpha()
+    status: not_implemented
+    notes: Premultiplied alpha conversion
+  - key: blit_array
+    label: blit_array(array, dest)
+    status: not_implemented
+    notes: Array blitting
+- title: pygame.draw
+  table_label: Function
+  items:
+  - key: draw.rect
+    label: draw.rect(surface, color, rect, width, border_radius, ...)
+    status: implemented
+    notes: Draws rectangle with border radius support
+  - key: draw.polygon
+    label: draw.polygon(surface, color, points, width)
+    status: implemented
+    notes: Draws polygon
+  - key: draw.circle
+    label: draw.circle(surface, color, center, radius, width, ...)
+    status: implemented
+    notes: Draws circle
+  - key: draw.ellipse
+    label: draw.ellipse(surface, color, rect, width)
+    status: implemented
+    notes: Draws ellipse
+  - key: draw.arc
+    label: draw.arc(surface, color, rect, start_angle, stop_angle, width)
+    status: implemented
+    notes: Draws arc
+  - key: draw.line
+    label: draw.line(surface, color, start_pos, end_pos, width)
+    status: implemented
+    notes: Draws line
+  - key: draw.lines
+    label: draw.lines(surface, color, closed, points, width)
+    status: implemented
+    notes: Draws connected lines
+  - key: draw.aaline
+    label: draw.aaline(surface, color, start_pos, end_pos, blend)
+    status: implemented
+    notes: Anti-aliased line
+  - key: draw.aalines
+    label: draw.aalines(surface, color, closed, points, blend)
+    status: implemented
+    notes: Anti-aliased lines
+- title: pygame.event
+  table_label: Function
+  items:
+  - key: Event
+    label: Event(type, dict, **kwargs)
+    status: implemented
+    notes: Event object with type and attributes
+  - key: event.pump
+    label: event.pump()
+    status: implemented
+    notes: No-op (events arrive via callbacks)
+  - key: event.get
+    label: event.get(eventtype, pump, exclude)
+    status: implemented
+    notes: Get and remove events
+  - key: event.poll
+    label: event.poll()
+    status: implemented
+    notes: Get single event or NOEVENT
+  - key: event.wait
+    label: event.wait(timeout)
+    status: implemented
+    notes: Wait for event (polls in Jupyter)
+  - key: event.peek
+    label: event.peek(eventtype, pump)
+    status: implemented
+    notes: Check for events without removing
+  - key: event.clear
+    label: event.clear(eventtype, pump)
+    status: implemented
+    notes: Remove events from queue
+  - key: event.event_name
+    label: event.event_name(type)
+    status: implemented
+    notes: Get event name string
+  - key: event.set_blocked
+    label: event.set_blocked(type)
+    status: implemented
+    notes: Block event types
+  - key: event.set_allowed
+    label: event.set_allowed(type)
+    status: implemented
+    notes: Allow event types
+  - key: event.get_blocked
+    label: event.get_blocked(type)
+    status: implemented
+    notes: Check if event type blocked
+  - key: event.set_grab
+    label: event.set_grab(grab)
+    status: implemented
+    notes: Set input grab state
+  - key: event.get_grab
+    label: event.get_grab()
+    status: implemented
+    notes: Get input grab state
+  - key: event.post
+    label: event.post(event)
+    status: implemented
+    notes: Post event to queue
+  - key: event.custom_type
+    label: event.custom_type()
+    status: implemented
+    notes: Get unique event type ID
+  - key: event.set_keyboard_grab
+    label: event.set_keyboard_grab(grab)
+    status: not_implemented
+    notes: Keyboard grab control
+  - key: event.get_keyboard_grab
+    label: event.get_keyboard_grab()
+    status: not_implemented
+    notes: Get keyboard grab state
+- title: pygame.key
+  table_label: Function
+  items:
+  - key: key.get_focused
+    label: key.get_focused()
+    status: implemented
+    notes: Returns True (canvas focus assumed)
+  - key: key.get_pressed
+    label: key.get_pressed()
+    status: implemented
+    notes: Returns ScancodeWrapper of key states
+  - key: key.get_just_pressed
+    label: key.get_just_pressed()
+    status: implemented
+    notes: Returns keys pressed this frame
+  - key: key.get_just_released
+    label: key.get_just_released()
+    status: implemented
+    notes: Returns keys released this frame
+  - key: key.get_mods
+    label: key.get_mods()
+    status: implemented
+    notes: Returns modifier key bitmask
+  - key: key.set_mods
+    label: key.set_mods(mods)
+    status: implemented
+    notes: Sets modifier state
+  - key: key.set_repeat
+    label: key.set_repeat(delay, interval)
+    status: implemented
+    notes: Sets key repeat
+  - key: key.get_repeat
+    label: key.get_repeat()
+    status: implemented
+    notes: Gets key repeat settings
+  - key: key.name
+    label: key.name(key)
+    status: implemented
+    notes: Get key name string
+  - key: key.key_code
+    label: key.key_code(name)
+    status: implemented
+    notes: Get key constant from name
+  - key: key.start_text_input
+    label: key.start_text_input()
+    status: implemented
+    notes: Enable text input (stored state)
+  - key: key.stop_text_input
+    label: key.stop_text_input()
+    status: implemented
+    notes: Disable text input
+  - key: key.set_text_input_rect
+    label: key.set_text_input_rect(rect)
+    status: not_implemented
+    notes: Stored but no IME positioning
+- title: pygame.mouse
+  table_label: Function
+  items:
+  - key: mouse.get_pressed
+    label: mouse.get_pressed(num_buttons, desktop)
+    status: implemented
+    notes: Returns button states
+  - key: mouse.get_just_pressed
+    label: mouse.get_just_pressed()
+    status: implemented
+    notes: Buttons pressed this frame
+  - key: mouse.get_just_released
+    label: mouse.get_just_released()
+    status: implemented
+    notes: Buttons released this frame
+  - key: mouse.get_pos
+    label: mouse.get_pos()
+    status: implemented
+    notes: Returns mouse position
+  - key: mouse.get_rel
+    label: mouse.get_rel()
+    status: implemented
+    notes: Returns relative movement
+  - key: mouse.set_pos
+    label: mouse.set_pos(pos)
+    status: not_implemented
+    notes: Stores position (can't move cursor in browser)
+  - key: mouse.set_visible
+    label: mouse.set_visible(bool)
+    status: not_implemented
+    notes: Stores state (limited browser control)
+  - key: mouse.get_visible
+    label: mouse.get_visible()
+    status: implemented
+    notes: Returns visibility state
+  - key: mouse.get_focused
+    label: mouse.get_focused()
+    status: implemented
+    notes: Returns True (assumes focus)
+  - key: mouse.set_cursor
+    label: mouse.set_cursor(cursor)
+    status: not_implemented
+    notes: Stored but limited browser control
+  - key: mouse.get_cursor
+    label: mouse.get_cursor()
+    status: implemented
+    notes: Returns current cursor
+  - key: mouse.set_relative_mode
+    label: mouse.set_relative_mode(bool)
+    status: not_implemented
+    notes: Stores state (limited in browser)
+  - key: mouse.get_relative_mode
+    label: mouse.get_relative_mode()
+    status: implemented
+    notes: Returns relative mode state
+- title: pygame.time
+  table_label: Function
+  items:
+  - key: time.get_ticks
+    label: time.get_ticks()
+    status: implemented
+    notes: Milliseconds since init()
+  - key: time.wait
+    label: time.wait(milliseconds)
+    status: implemented
+    notes: Pause using time.sleep()
+  - key: time.delay
+    label: time.delay(milliseconds)
+    status: implemented
+    notes: Accurate delay (same as wait in ipygame)
+  - key: time.set_timer
+    label: time.set_timer(event, millis, loops)
+    status: implemented
+    notes: Post events periodically using threading
+  - key: Clock
+    label: Clock()
+    status: implemented
+    notes: Clock class
+  - key: Clock.tick
+    label: Clock.tick(framerate)
+    status: implemented
+    notes: Update clock with frame limiting
+  - key: Clock.tick_busy_loop
+    label: Clock.tick_busy_loop(framerate)
+    status: implemented
+    notes: Accurate tick with busy wait
+  - key: Clock.get_time
+    label: Clock.get_time()
+    status: implemented
+    notes: Time of previous tick
+  - key: Clock.get_rawtime
+    label: Clock.get_rawtime()
+    status: implemented
+    notes: Raw time without delay
+  - key: Clock.get_fps
+    label: Clock.get_fps()
+    status: implemented
+    notes: Calculate framerate
+- title: pygame.font
+  table_label: Function
+  items:
+  - key: font.init
+    label: font.init()
+    status: implemented
+    notes: Initialize font module
+  - key: font.quit
+    label: font.quit()
+    status: implemented
+    notes: Uninitialize font module
+  - key: font.get_init
+    label: font.get_init()
+    status: implemented
+    notes: Get init status
+  - key: font.get_default_font
+    label: font.get_default_font()
+    status: implemented
+    notes: Returns "freesansbold.ttf"
+  - key: font.get_fonts
+    label: font.get_fonts()
+    status: implemented
+    notes: List system fonts
+  - key: font.match_font
+    label: font.match_font(name, bold, italic)
+    status: implemented
+    notes: Find system font file
+  - key: font.SysFont
+    label: font.SysFont(name, size, bold, italic)
+    status: implemented
+    notes: Create system font
+  - key: Font
+    label: Font(filename, size)
+    status: implemented
+    notes: Create Font from file
+  - key: Font.render
+    label: Font.render(text, antialias, color, background)
+    status: implemented
+    notes: Render text to surface using Pillow
+  - key: Font.size
+    label: Font.size(text)
+    status: implemented
+    notes: Get rendered text dimensions
+  - key: Font.set_underline
+    label: Font.set_underline(bool)
+    status: implemented
+    notes: Enable/disable underline
+  - key: Font.get_underline
+    label: Font.get_underline()
+    status: implemented
+    notes: Get underline state
+  - key: Font.set_bold
+    label: Font.set_bold(bool)
+    status: implemented
+    notes: Enable/disable bold
+  - key: Font.get_bold
+    label: Font.get_bold()
+    status: implemented
+    notes: Get bold state
+  - key: Font.set_italic
+    label: Font.set_italic(bool)
+    status: implemented
+    notes: Enable/disable italic
+  - key: Font.get_italic
+    label: Font.get_italic()
+    status: implemented
+    notes: Get italic state
+  - key: Font.metrics
+    label: Font.metrics(text)
+    status: not_implemented
+    notes: Character metrics
+  - key: Font.get_linesize
+    label: Font.get_linesize()
+    status: not_implemented
+    notes: Line spacing
+  - key: Font.get_height
+    label: Font.get_height()
+    status: not_implemented
+    notes: Font height
+  - key: Font.get_ascent
+    label: Font.get_ascent()
+    status: not_implemented
+    notes: Ascent metric
+  - key: Font.get_descent
+    label: Font.get_descent()
+    status: not_implemented
+    notes: Descent metric
+  - key: font.get_sdl_ttf_version
+    label: font.get_sdl_ttf_version()
+    status: not_implemented
+    notes: Returns (0,0,0)
+- title: pygame.image
+  table_label: Function
+  items:
+  - key: image.load
+    label: image.load(file, namehint)
+    status: implemented
+    notes: Load image using Pillow
+  - key: image.save
+    label: image.save(surface, file, namehint)
+    status: implemented
+    notes: Save image using Pillow
+  - key: image.get_extended
+    label: image.get_extended()
+    status: not_implemented
+    notes: Returns True (Pillow supports extended formats)
+  - key: image.tostring
+    label: image.tostring(surface, format, flipped)
+    status: implemented
+    notes: Surface to bytes (deprecated)
+  - key: image.tobytes
+    label: image.tobytes(surface, format, flipped)
+    status: implemented
+    notes: Surface to bytes
+  - key: image.fromstring
+    label: image.fromstring(bytes, size, format, flipped)
+    status: implemented
+    notes: Bytes to surface (deprecated)
+  - key: image.frombytes
+    label: image.frombytes(bytes, size, format, flipped)
+    status: implemented
+    notes: Bytes to surface
+  - key: image.frombuffer
+    label: image.frombuffer(buffer, size, format)
+    status: implemented
+    notes: Buffer to surface
+  - key: image.load_basic
+    label: image.load_basic(file)
+    status: implemented
+    notes: Load basic formats
+  - key: image.load_extended
+    label: image.load_extended(file, namehint)
+    status: implemented
+    notes: Load extended formats
+  - key: image.save_extended
+    label: image.save_extended(surface, file, namehint)
+    status: implemented
+    notes: Save extended formats
+  - key: image.load_sized_svg
+    label: image.load_sized_svg(file, size)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+- title: pygame.transform
+  table_label: Function
+  items:
+  - key: transform.flip
+    label: transform.flip(surface, flip_x, flip_y)
+    status: implemented
+    notes: Flip surface
+  - key: transform.scale
+    label: transform.scale(surface, size, dest_surface)
+    status: implemented
+    notes: Scale using Pillow
+  - key: transform.scale_by
+    label: transform.scale_by(surface, factor, dest_surface)
+    status: implemented
+    notes: Scale by factor
+  - key: transform.rotate
+    label: transform.rotate(surface, angle)
+    status: implemented
+    notes: Rotate using Pillow
+  - key: transform.rotozoom
+    label: transform.rotozoom(surface, angle, scale)
+    status: implemented
+    notes: Combined rotate and zoom
+  - key: transform.scale2x
+    label: transform.scale2x(surface, dest_surface)
+    status: implemented
+    notes: 2x scale (uses Pillow)
+  - key: transform.smoothscale
+    label: transform.smoothscale(surface, size, dest_surface)
+    status: implemented
+    notes: Smooth scale using Pillow
+  - key: transform.smoothscale_by
+    label: transform.smoothscale_by(surface, factor, dest_surface)
+    status: implemented
+    notes: Smooth scale by factor
+  - key: transform.get_smoothscale_backend
+    label: transform.get_smoothscale_backend()
+    status: implemented
+    notes: Returns "GENERIC"
+  - key: transform.set_smoothscale_backend
+    label: transform.set_smoothscale_backend(backend)
+    status: implemented
+    notes: No-op (always Pillow)
+  - key: transform.chop
+    label: transform.chop(surface, rect)
+    status: implemented
+    notes: Extract region
+  - key: transform.laplacian
+    label: transform.laplacian(surface, dest_surface)
+    status: implemented
+    notes: Edge detection filter
+  - key: transform.average_surfaces
+    label: transform.average_surfaces(surfaces, dest_surface, palette_colors)
+    status: implemented
+    notes: Average multiple surfaces
+  - key: transform.average_color
+    label: transform.average_color(surface, rect, consider_alpha)
+    status: implemented
+    notes: Average color in region
+  - key: transform.threshold
+    label: transform.threshold(...)
+    status: implemented
+    notes: Color threshold operation
+  - key: transform.grayscale
+    label: transform.grayscale(surface, dest_surface)
+    status: implemented
+    notes: Convert to grayscale
+  - key: transform.invert
+    label: transform.invert(surface, dest_surface)
+    status: implemented
+    notes: Invert colors
+  - key: transform.box_blur
+    label: transform.box_blur(surface, radius, repeat_edge_pixels, dest_surface)
+    status: implemented
+    notes: Box blur filter
+  - key: transform.gaussian_blur
+    label: transform.gaussian_blur(surface, radius, repeat_edge_pixels, dest_surface)
+    status: implemented
+    notes: Gaussian blur
+  - key: transform.hsl
+    label: transform.hsl(surface, hue_adjust, sat_adjust, light_adjust)
+    status: implemented
+    notes: HSL color adjustment
+  - key: transform.pixelate
+    label: transform.pixelate(surface, size, dest_surface)
+    status: implemented
+    notes: Pixelate effect
+  - key: transform.solid_overlay
+    label: transform.solid_overlay(surface, color, dest_surface)
+    status: implemented
+    notes: Solid color overlay
+- title: pygame.sprite
+  table_label: Class/Function
+  items:
+  - key: Sprite
+    label: Sprite(*groups)
+    status: implemented
+    notes: Basic sprite class
+  - key: Sprite.image
+    label: Sprite.image
+    status: implemented
+    notes: Surface attribute
+  - key: Sprite.rect
+    label: Sprite.rect
+    status: implemented
+    notes: Rect attribute
+  - key: Sprite.add
+    label: Sprite.add(*groups)
+    status: implemented
+    notes: Add to groups
+  - key: Sprite.remove
+    label: Sprite.remove(*groups)
+    status: implemented
+    notes: Remove from groups
+  - key: Sprite.kill
+    label: Sprite.kill()
+    status: implemented
+    notes: Remove from all groups
+  - key: Sprite.alive
+    label: Sprite.alive()
+    status: implemented
+    notes: Check if in any group
+  - key: Sprite.groups
+    label: Sprite.groups()
+    status: implemented
+    notes: List of containing groups
+  - key: Sprite.update
+    label: Sprite.update(*args, **kwargs)
+    status: implemented
+    notes: Update method (override)
+  - key: DirtySprite
+    label: DirtySprite
+    status: not_implemented
+    notes: Dirty rect optimization
+  - key: Group
+    label: Group(*sprites)
+    status: implemented
+    notes: Basic sprite group
+  - key: Group.sprites
+    label: Group.sprites()
+    status: implemented
+    notes: List of sprites
+  - key: Group.copy
+    label: Group.copy()
+    status: implemented
+    notes: Copy group
+  - key: Group.add
+    label: Group.add(*sprites)
+    status: implemented
+    notes: Add sprites
+  - key: Group.remove
+    label: Group.remove(*sprites)
+    status: implemented
+    notes: Remove sprites
+  - key: Group.has
+    label: Group.has(*sprites)
+    status: implemented
+    notes: Check membership
+  - key: Group.update
+    label: Group.update(*args, **kwargs)
+    status: implemented
+    notes: Update all sprites
+  - key: Group.draw
+    label: Group.draw(surface)
+    status: implemented
+    notes: Draw all sprites
+  - key: Group.clear
+    label: Group.clear(surface, bgd)
+    status: implemented
+    notes: Clear sprites
+  - key: Group.empty
+    label: Group.empty()
+    status: implemented
+    notes: Remove all sprites
+  - key: GroupSingle
+    label: GroupSingle(sprite)
+    status: implemented
+    notes: Group holding single sprite
+  - key: RenderPlain
+    label: RenderPlain
+    status: not_implemented
+    notes: Alias for Group
+  - key: RenderClear
+    label: RenderClear
+    status: not_implemented
+    notes: Render with clear
+  - key: RenderUpdates
+    label: RenderUpdates
+    status: implemented
+    notes: Group tracking dirty rects
+  - key: OrderedUpdates
+    label: OrderedUpdates
+    status: implemented
+    notes: Ordered sprite group
+  - key: LayeredUpdates
+    label: LayeredUpdates
+    status: implemented
+    notes: Layered sprite group
+  - key: LayeredDirty
+    label: LayeredDirty
+    status: not_implemented
+    notes: Layered with dirty rects
+  - key: spritecollide
+    label: spritecollide(sprite, group, dokill, collided)
+    status: implemented
+    notes: Sprite-group collision
+  - key: collide_rect
+    label: collide_rect(left, right)
+    status: implemented
+    notes: Rectangle collision
+  - key: collide_rect_ratio
+    label: collide_rect_ratio(ratio)
+    status: not_implemented
+    notes: Scaled rect collision
+  - key: collide_circle
+    label: collide_circle(left, right)
+    status: implemented
+    notes: Circle collision
+  - key: collide_circle_ratio
+    label: collide_circle_ratio(ratio)
+    status: not_implemented
+    notes: Scaled circle collision
+  - key: collide_mask
+    label: collide_mask(left, right)
+    status: implemented
+    notes: Mask collision
+  - key: groupcollide
+    label: groupcollide(group1, group2, dokill1, dokill2, collided)
+    status: implemented
+    notes: Group-group collision
+  - key: spritecollideany
+    label: spritecollideany(sprite, group, collided)
+    status: implemented
+    notes: Check any collision
+- title: pygame.Rect / FRect
+  table_label: Method/Property
+  items:
+  - key: Rect
+    label: Rect(left, top, width, height)
+    status: implemented
+    notes: Integer rect
+  - key: FRect
+    label: FRect(left, top, width, height)
+    status: implemented
+    notes: Float rect
+  - key: x, y, w, h, width, height
+    label: x, y, w, h, width, height
+    status: implemented
+    notes: Basic properties
+  - key: top, left, bottom, right
+    label: top, left, bottom, right
+    status: implemented
+    notes: Edge properties
+  - key: topleft, topright, bottomleft, bottomright
+    label: topleft, topright, bottomleft, bottomright
+    status: implemented
+    notes: Corner properties
+  - key: midtop, midleft, midbottom, midright
+    label: midtop, midleft, midbottom, midright
+    status: implemented
+    notes: Mid-edge properties
+  - key: center, centerx, centery
+    label: center, centerx, centery
+    status: implemented
+    notes: Center properties
+  - key: size
+    label: size
+    status: implemented
+    notes: (w, h) tuple
+  - key: copy
+    label: copy()
+    status: implemented
+    notes: Copy rect
+  - key: move
+    label: move(x, y)
+    status: implemented
+    notes: Move rect
+  - key: move_ip
+    label: move_ip(x, y)
+    status: implemented
+    notes: Move in-place
+  - key: inflate
+    label: inflate(x, y)
+    status: implemented
+    notes: Grow/shrink rect
+  - key: inflate_ip
+    label: inflate_ip(x, y)
+    status: implemented
+    notes: Grow/shrink in-place
+  - key: update
+    label: update(left, top, width, height)
+    status: implemented
+    notes: Update values
+  - key: clamp
+    label: clamp(rect)
+    status: implemented
+    notes: Clamp inside rect
+  - key: clamp_ip
+    label: clamp_ip(rect)
+    status: implemented
+    notes: Clamp in-place
+  - key: clip
+    label: clip(rect)
+    status: implemented
+    notes: Intersection
+  - key: clipline
+    label: clipline(x1, y1, x2, y2)
+    status: implemented
+    notes: Clip line to rect
+  - key: union
+    label: union(rect)
+    status: implemented
+    notes: Bounding union
+  - key: union_ip
+    label: union_ip(rect)
+    status: implemented
+    notes: Union in-place
+  - key: unionall
+    label: unionall(rect_list)
+    status: implemented
+    notes: Union of multiple rects
+  - key: unionall_ip
+    label: unionall_ip(rect_list)
+    status: implemented
+    notes: Union all in-place
+  - key: fit
+    label: fit(rect)
+    status: implemented
+    notes: Fit inside rect
+  - key: normalize
+    label: normalize()
+    status: implemented
+    notes: Ensure positive w, h
+  - key: contains
+    label: contains(rect)
+    status: implemented
+    notes: Check containment
+  - key: collidepoint
+    label: collidepoint(x, y)
+    status: implemented
+    notes: Point collision
+  - key: colliderect
+    label: colliderect(rect)
+    status: implemented
+    notes: Rect collision
+  - key: collidelist
+    label: collidelist(list)
+    status: implemented
+    notes: Test against list
+  - key: collidelistall
+    label: collidelistall(list)
+    status: implemented
+    notes: All collisions in list
+  - key: collidedict
+    label: collidedict(dict)
+    status: implemented
+    notes: Dict collision test
+  - key: collidedictall
+    label: collidedictall(dict)
+    status: implemented
+    notes: All dict collisions
+  - key: collideobjectsall
+    label: collideobjectsall(objects)
+    status: implemented
+    notes: Collision with objects
+  - key: collideobjects
+    label: collideobjects(objects)
+    status: implemented
+    notes: First collision with objects
+- title: pygame.Color
+  table_label: Method/Property
+  items:
+  - key: Color
+    label: Color(r, g, b, a=255)
+    status: implemented
+    notes: RGBA color
+  - key: Color
+    label: Color(color_name)
+    status: implemented
+    notes: Named colors
+  - key: Color
+    label: Color('#RRGGBB')
+    status: implemented
+    notes: Hex string
+  - key: Color
+    label: Color(mapped_int)
+    status: implemented
+    notes: Packed integer
+  - key: r, g, b, a
+    label: r, g, b, a
+    status: implemented
+    notes: RGBA properties
+  - key: hsva
+    label: hsva
+    status: implemented
+    notes: HSV+alpha tuple
+  - key: hsla
+    label: hsla
+    status: implemented
+    notes: HSL+alpha tuple
+  - key: cmy
+    label: cmy
+    status: implemented
+    notes: CMY tuple
+  - key: i1i2i3
+    label: i1i2i3
+    status: implemented
+    notes: I1I2I3 color space
+  - key: normalize
+    label: normalize()
+    status: implemented
+    notes: Normalized RGBA
+  - key: correct_gamma
+    label: correct_gamma(gamma)
+    status: implemented
+    notes: Gamma correction
+  - key: set_length
+    label: set_length(len)
+    status: implemented
+    notes: Set tuple length
+  - key: grayscale
+    label: grayscale()
+    status: implemented
+    notes: Convert to grayscale
+  - key: lerp
+    label: lerp(color, t)
+    status: implemented
+    notes: Linear interpolation
+  - key: premul_alpha
+    label: premul_alpha()
+    status: implemented
+    notes: Premultiply alpha
+  - key: update
+    label: update(r, g, b, a)
+    status: implemented
+    notes: Update values
+  - key: Arithmetic operators
+    label: Arithmetic operators
+    status: implemented
+    notes: +, -, *, //, %, **
+  - key: Comparison operators
+    label: Comparison operators
+    status: implemented
+    notes: ==, !=
+  - key: Indexing/iteration
+    label: Indexing/iteration
+    status: implemented
+    notes: color[i], for c in color
+- title: pygame.math
+  table_label: Class/Function
+  items:
+  - key: Vector2
+    label: Vector2(x, y)
+    status: implemented
+    notes: 2D vector
+  - key: Vector3
+    label: Vector3(x, y, z)
+    status: implemented
+    notes: 3D vector
+  - key: Vector2.x, Vector2.y
+    label: Vector2.x, Vector2.y
+    status: implemented
+    notes: Components
+  - key: Vector3.x, Vector3.y, Vector3.z
+    label: Vector3.x, Vector3.y, Vector3.z
+    status: implemented
+    notes: Components
+  - key: Arithmetic operators
+    label: Arithmetic operators
+    status: implemented
+    notes: +, -, *, /, //, %
+  - key: dot
+    label: dot(other)
+    status: implemented
+    notes: Dot product
+  - key: cross
+    label: cross(other)
+    status: implemented
+    notes: Cross product (Vector3)
+  - key: magnitude
+    label: magnitude()
+    status: implemented
+    notes: Vector length
+  - key: magnitude_squared
+    label: magnitude_squared()
+    status: implemented
+    notes: Squared length
+  - key: length
+    label: length()
+    status: implemented
+    notes: Alias for magnitude
+  - key: length_squared
+    label: length_squared()
+    status: implemented
+    notes: Alias for magnitude_squared
+  - key: normalize
+    label: normalize()
+    status: implemented
+    notes: Unit vector
+  - key: normalize_ip
+    label: normalize_ip()
+    status: implemented
+    notes: Normalize in-place
+  - key: is_normalized
+    label: is_normalized()
+    status: implemented
+    notes: Check if unit length
+  - key: scale_to_length
+    label: scale_to_length(length)
+    status: implemented
+    notes: Scale to specific length
+  - key: reflect
+    label: reflect(normal)
+    status: implemented
+    notes: Reflect across normal
+  - key: reflect_ip
+    label: reflect_ip(normal)
+    status: implemented
+    notes: Reflect in-place
+  - key: distance_to
+    label: distance_to(other)
+    status: implemented
+    notes: Distance between vectors
+  - key: distance_squared_to
+    label: distance_squared_to(other)
+    status: implemented
+    notes: Squared distance
+  - key: rotate
+    label: rotate(angle)
+    status: implemented
+    notes: Rotate vector (Vector2)
+  - key: rotate_ip
+    label: rotate_ip(angle)
+    status: implemented
+    notes: Rotate in-place (Vector2)
+  - key: rotate_rad
+    label: rotate_rad(angle)
+    status: implemented
+    notes: Rotate by radians (Vector2)
+  - key: rotate_rad_ip
+    label: rotate_rad_ip(angle)
+    status: implemented
+    notes: Rotate in-place by radians
+  - key: angle_to
+    label: angle_to(other)
+    status: implemented
+    notes: Angle to other vector
+  - key: as_polar
+    label: as_polar()
+    status: not_implemented
+    notes: Convert to polar (r, theta)
+  - key: from_polar
+    label: from_polar(polar)
+    status: not_implemented
+    notes: Create from polar coordinates
+  - key: lerp
+    label: lerp(other, t)
+    status: not_implemented
+    notes: Linear interpolation
+  - key: slerp
+    label: slerp(other, t)
+    status: not_implemented
+    notes: Spherical interpolation
+  - key: smoothstep
+    label: smoothstep(other, t)
+    status: not_implemented
+    notes: Smooth interpolation
+  - key: elementwise
+    label: elementwise()
+    status: not_implemented
+    notes: Element-wise operations
+  - key: move_towards
+    label: move_towards(target, max_distance)
+    status: not_implemented
+    notes: Move toward target
+  - key: move_towards_ip
+    label: move_towards_ip(target, max_distance)
+    status: not_implemented
+    notes: Move toward in-place
+  - key: clamp_magnitude
+    label: clamp_magnitude(max_length)
+    status: not_implemented
+    notes: Clamp to max length
+  - key: clamp_magnitude_ip
+    label: clamp_magnitude_ip(max_length)
+    status: not_implemented
+    notes: Clamp in-place
+  - key: clamp
+    label: clamp(min, max)
+    status: not_implemented
+    notes: Module-level clamp function
+  - key: epsilon
+    label: epsilon
+    status: implemented
+    notes: Comparison epsilon
+  - key: copy
+    label: copy()
+    status: implemented
+    notes: Copy vector
+- title: pygame.mask
+  table_label: Item
+  items:
+  - key: Function/Method
+    label: Function/Method
+    status: not_implemented
+    notes: Notes
+  - key: Mask
+    label: Mask(size, fill)
+    status: implemented
+    notes: Create mask
+  - key: from_surface
+    label: from_surface(surface, threshold)
+    status: implemented
+    notes: Create from surface
+  - key: from_threshold
+    label: from_threshold(surface, color, threshold, ...)
+    status: implemented
+    notes: Create from color threshold
+  - key: mask.copy
+    label: mask.copy()
+    status: implemented
+    notes: Copy mask
+  - key: mask.get_size
+    label: mask.get_size()
+    status: implemented
+    notes: Get dimensions
+  - key: mask.get_at
+    label: mask.get_at(pos)
+    status: implemented
+    notes: Get bit at position
+  - key: mask.set_at
+    label: mask.set_at(pos, value)
+    status: implemented
+    notes: Set bit at position
+  - key: mask.overlap
+    label: mask.overlap(other, offset)
+    status: implemented
+    notes: Find overlap position
+  - key: mask.overlap_area
+    label: mask.overlap_area(other, offset)
+    status: implemented
+    notes: Count overlapping bits
+  - key: mask.overlap_mask
+    label: mask.overlap_mask(other, offset)
+    status: implemented
+    notes: Create overlap mask
+  - key: mask.fill
+    label: mask.fill()
+    status: implemented
+    notes: Fill with 1s
+  - key: mask.clear
+    label: mask.clear()
+    status: implemented
+    notes: Fill with 0s
+  - key: mask.invert
+    label: mask.invert()
+    status: implemented
+    notes: Invert bits
+  - key: mask.get_rect
+    label: mask.get_rect(**kwargs)
+    status: implemented
+    notes: Get bounding rect
+  - key: mask.count
+    label: mask.count()
+    status: not_implemented
+    notes: Count set bits
+  - key: mask.centroid
+    label: mask.centroid()
+    status: not_implemented
+    notes: Calculate centroid
+  - key: mask.angle
+    label: mask.angle()
+    status: not_implemented
+    notes: Calculate orientation angle
+  - key: mask.outline
+    label: mask.outline(every)
+    status: not_implemented
+    notes: Get outline points
+  - key: mask.convolve
+    label: mask.convolve(other, output, offset)
+    status: not_implemented
+    notes: Convolve masks
+  - key: mask.connected_component
+    label: mask.connected_component(pos)
+    status: not_implemented
+    notes: Get connected component
+  - key: mask.connected_components
+    label: mask.connected_components(minimum)
+    status: not_implemented
+    notes: Get all components
+  - key: mask.get_bounding_rects
+    label: mask.get_bounding_rects()
+    status: not_implemented
+    notes: Get all bounding rects
+  - key: mask.draw
+    label: mask.draw(other, offset)
+    status: not_implemented
+    notes: Draw mask onto this
+  - key: mask.erase
+    label: mask.erase(other, offset)
+    status: not_implemented
+    notes: Erase other from this
+  - key: mask.scale
+    label: mask.scale(size)
+    status: not_implemented
+    notes: Scale mask
+  - key: mask.to_surface
+    label: mask.to_surface(...)
+    status: not_implemented
+    notes: Convert to surface
+- title: pygame.gfxdraw
+  table_label: Function
+  items:
+  - key: pixel
+    label: pixel(surface, x, y, color)
+    status: not_implemented
+    notes: Single pixel (uses set_at)
+  - key: hline
+    label: hline(surface, x1, x2, y, color)
+    status: not_implemented
+    notes: Horizontal line
+  - key: vline
+    label: vline(surface, x, y1, y2, color)
+    status: not_implemented
+    notes: Vertical line
+  - key: rectangle
+    label: rectangle(surface, rect, color)
+    status: not_implemented
+    notes: Rectangle outline
+  - key: box
+    label: box(surface, rect, color)
+    status: not_implemented
+    notes: Filled rectangle
+  - key: line
+    label: line(surface, x1, y1, x2, y2, color)
+    status: not_implemented
+    notes: Line
+  - key: circle
+    label: circle(surface, x, y, r, color)
+    status: not_implemented
+    notes: Circle outline
+  - key: arc
+    label: arc(surface, x, y, r, start, end, color)
+    status: not_implemented
+    notes: Arc
+  - key: aacircle
+    label: aacircle(surface, x, y, r, color)
+    status: not_implemented
+    notes: Anti-aliased circle
+  - key: filled_circle
+    label: filled_circle(surface, x, y, r, color)
+    status: not_implemented
+    notes: Filled circle
+  - key: ellipse
+    label: ellipse(surface, x, y, rx, ry, color)
+    status: not_implemented
+    notes: Ellipse outline
+  - key: aaellipse
+    label: aaellipse(surface, x, y, rx, ry, color)
+    status: not_implemented
+    notes: Anti-aliased ellipse
+  - key: filled_ellipse
+    label: filled_ellipse(surface, x, y, rx, ry, color)
+    status: not_implemented
+    notes: Filled ellipse
+  - key: pie
+    label: pie(surface, x, y, r, start, end, color)
+    status: not_implemented
+    notes: Pie slice
+  - key: trigon
+    label: trigon(surface, x1, y1, x2, y2, x3, y3, color)
+    status: not_implemented
+    notes: Triangle
+  - key: aatrigon
+    label: aatrigon(surface, x1, y1, x2, y2, x3, y3, color)
+    status: not_implemented
+    notes: AA triangle
+  - key: filled_trigon
+    label: filled_trigon(surface, x1, y1, x2, y2, x3, y3, color)
+    status: not_implemented
+    notes: Filled triangle
+  - key: polygon
+    label: polygon(surface, points, color)
+    status: not_implemented
+    notes: Polygon outline
+  - key: aapolygon
+    label: aapolygon(surface, points, color)
+    status: not_implemented
+    notes: AA polygon
+  - key: filled_polygon
+    label: filled_polygon(surface, points, color)
+    status: not_implemented
+    notes: Filled polygon
+  - key: textured_polygon
+    label: textured_polygon(surface, points, texture, tx, ty)
+    status: not_implemented
+    notes: Textured polygon
+  - key: bezier
+    label: bezier(surface, points, steps, color)
+    status: not_implemented
+    notes: Bezier curve
+- title: pygame.surfarray
+  table_label: Function
+  items:
+  - key: array2d
+    label: array2d(surface)
+    status: implemented
+    notes: 2D pixel array (grayscale)
+  - key: array3d
+    label: array3d(surface)
+    status: implemented
+    notes: 3D RGB array
+  - key: pixels2d
+    label: pixels2d(surface)
+    status: implemented
+    notes: 2D view (writable)
+  - key: pixels3d
+    label: pixels3d(surface)
+    status: implemented
+    notes: 3D view (writable)
+  - key: array_alpha
+    label: array_alpha(surface)
+    status: not_implemented
+    notes: Alpha channel array
+  - key: array_colorkey
+    label: array_colorkey(surface)
+    status: not_implemented
+    notes: Colorkey array
+  - key: make_surface
+    label: make_surface(array)
+    status: implemented
+    notes: Create surface from array
+  - key: blit_array
+    label: blit_array(surface, array)
+    status: not_implemented
+    notes: Blit array to surface
+  - key: map_array
+    label: map_array(surface, array)
+    status: not_implemented
+    notes: Map colors to pixel values
+  - key: use_arraytype
+    label: use_arraytype(arraytype)
+    status: not_implemented
+    notes: Set array type (always numpy)
+  - key: get_arraytype
+    label: get_arraytype()
+    status: not_implemented
+    notes: Returns "numpy"
+  - key: get_arraytypes
+    label: get_arraytypes()
+    status: not_implemented
+    notes: Returns ["numpy"]
+- title: pygame.pixelcopy
+  table_label: Function
+  items:
+  - key: surface_to_array
+    label: surface_to_array(array, surface, kind, opaque, ...)
+    status: not_implemented
+    notes: Fast surface to array copy
+  - key: array_to_surface
+    label: array_to_surface(surface, array)
+    status: not_implemented
+    notes: Fast array to surface copy
+  - key: map_array
+    label: map_array(surface, array3d, array2d)
+    status: not_implemented
+    notes: Map RGB to pixel values
+  - key: make_surface
+    label: make_surface(array)
+    status: not_implemented
+    notes: Create surface from array
+- title: pygame.mixer
+  table_label: Item
+  items:
+  - key: Function/Class
+    label: Function/Class
+    status: not_implemented
+    notes: Notes
+  - key: mixer.init
+    label: mixer.init(...)
+    status: not_applicable
+    notes: Audio initialization
+  - key: mixer.pre_init
+    label: mixer.pre_init(...)
+    status: not_applicable
+    notes: Pre-initialize mixer
+  - key: mixer.quit
+    label: mixer.quit()
+    status: not_applicable
+    notes: Uninitialize mixer
+  - key: mixer.get_init
+    label: mixer.get_init()
+    status: not_applicable
+    notes: Get audio settings
+  - key: mixer.stop
+    label: mixer.stop()
+    status: not_applicable
+    notes: Stop all channels
+  - key: mixer.pause
+    label: mixer.pause()
+    status: not_applicable
+    notes: Pause all channels
+  - key: mixer.unpause
+    label: mixer.unpause()
+    status: not_applicable
+    notes: Unpause all channels
+  - key: mixer.fadeout
+    label: mixer.fadeout(time)
+    status: not_applicable
+    notes: Fade out all sounds
+  - key: mixer.set_num_channels
+    label: mixer.set_num_channels(count)
+    status: not_applicable
+    notes: Set channel count
+  - key: mixer.get_num_channels
+    label: mixer.get_num_channels()
+    status: not_applicable
+    notes: Get channel count
+  - key: mixer.set_reserved
+    label: mixer.set_reserved(count)
+    status: not_applicable
+    notes: Reserve channels
+  - key: mixer.find_channel
+    label: mixer.find_channel(force)
+    status: not_applicable
+    notes: Find available channel
+  - key: mixer.get_busy
+    label: mixer.get_busy()
+    status: not_applicable
+    notes: Check if any sound playing
+  - key: Sound
+    label: Sound(file)
+    status: not_applicable
+    notes: Sound object
+  - key: Sound.play
+    label: Sound.play(loops, maxtime, fade_ms)
+    status: not_applicable
+    notes: Play sound
+  - key: Sound.stop
+    label: Sound.stop()
+    status: not_applicable
+    notes: Stop sound
+  - key: Sound.fadeout
+    label: Sound.fadeout(time)
+    status: not_applicable
+    notes: Fade out sound
+  - key: Sound.set_volume
+    label: Sound.set_volume(value)
+    status: not_applicable
+    notes: Set volume
+  - key: Sound.get_volume
+    label: Sound.get_volume()
+    status: not_applicable
+    notes: Get volume
+  - key: Sound.get_num_channels
+    label: Sound.get_num_channels()
+    status: not_applicable
+    notes: Active channels
+  - key: Sound.get_length
+    label: Sound.get_length()
+    status: not_applicable
+    notes: Sound duration
+  - key: Channel
+    label: Channel(id)
+    status: not_applicable
+    notes: Channel object
+  - key: Channel.play
+    label: Channel.play(sound, ...)
+    status: not_applicable
+    notes: Play on channel
+  - key: Channel.stop
+    label: Channel.stop()
+    status: not_applicable
+    notes: Stop channel
+  - key: Channel.pause
+    label: Channel.pause()
+    status: not_applicable
+    notes: Pause channel
+  - key: Channel.unpause
+    label: Channel.unpause()
+    status: not_applicable
+    notes: Unpause channel
+  - key: Channel.fadeout
+    label: Channel.fadeout(time)
+    status: not_applicable
+    notes: Fade out channel
+  - key: Channel.set_volume
+    label: Channel.set_volume(left, right)
+    status: not_applicable
+    notes: Set channel volume
+  - key: Channel.get_volume
+    label: Channel.get_volume()
+    status: not_applicable
+    notes: Get channel volume
+  - key: Channel.get_busy
+    label: Channel.get_busy()
+    status: not_applicable
+    notes: Check if playing
+  - key: Channel.get_sound
+    label: Channel.get_sound()
+    status: not_applicable
+    notes: Get current sound
+  - key: Channel.queue
+    label: Channel.queue(sound)
+    status: not_applicable
+    notes: Queue sound
+  - key: Channel.get_queue
+    label: Channel.get_queue()
+    status: not_applicable
+    notes: Get queued sound
+- title: pygame.mixer.music
+  table_label: Function
+  items:
+  - key: music.load
+    label: music.load(file)
+    status: not_applicable
+    notes: Load music file
+  - key: music.unload
+    label: music.unload()
+    status: not_applicable
+    notes: Unload music
+  - key: music.play
+    label: music.play(loops, start, fade_ms)
+    status: not_applicable
+    notes: Play music
+  - key: music.rewind
+    label: music.rewind()
+    status: not_applicable
+    notes: Restart music
+  - key: music.stop
+    label: music.stop()
+    status: not_applicable
+    notes: Stop music
+  - key: music.pause
+    label: music.pause()
+    status: not_applicable
+    notes: Pause music
+  - key: music.unpause
+    label: music.unpause()
+    status: not_applicable
+    notes: Unpause music
+  - key: music.fadeout
+    label: music.fadeout(time)
+    status: not_applicable
+    notes: Fade out music
+  - key: music.set_volume
+    label: music.set_volume(volume)
+    status: not_applicable
+    notes: Set volume
+  - key: music.get_volume
+    label: music.get_volume()
+    status: not_applicable
+    notes: Get volume
+  - key: music.get_busy
+    label: music.get_busy()
+    status: not_applicable
+    notes: Check if playing
+  - key: music.set_pos
+    label: music.set_pos(pos)
+    status: not_applicable
+    notes: Set position
+  - key: music.get_pos
+    label: music.get_pos()
+    status: not_applicable
+    notes: Get position
+  - key: music.queue
+    label: music.queue(file)
+    status: not_applicable
+    notes: Queue next music
+  - key: music.set_endevent
+    label: music.set_endevent(type)
+    status: not_applicable
+    notes: Set end event
+  - key: music.get_endevent
+    label: music.get_endevent()
+    status: not_applicable
+    notes: Get end event
+- title: pygame.joystick
+  table_label: Item
+  items:
+  - key: Function/Method
+    label: Function/Method
+    status: not_implemented
+    notes: Notes
+  - key: joystick.init
+    label: joystick.init()
+    status: not_applicable
+    notes: Initialize joystick
+  - key: joystick.quit
+    label: joystick.quit()
+    status: not_applicable
+    notes: Uninitialize joystick
+  - key: joystick.get_init
+    label: joystick.get_init()
+    status: not_applicable
+    notes: Get init status
+  - key: joystick.get_count
+    label: joystick.get_count()
+    status: not_applicable
+    notes: Number of joysticks
+  - key: Joystick
+    label: Joystick(id)
+    status: not_applicable
+    notes: Joystick object
+  - key: Joystick.init
+    label: Joystick.init()
+    status: not_applicable
+    notes: Initialize stick
+  - key: Joystick.quit
+    label: Joystick.quit()
+    status: not_applicable
+    notes: Uninitialize stick
+  - key: Joystick.get_init
+    label: Joystick.get_init()
+    status: not_applicable
+    notes: Get init status
+  - key: Joystick.get_id
+    label: Joystick.get_id()
+    status: not_applicable
+    notes: Get joystick ID
+  - key: Joystick.get_instance_id
+    label: Joystick.get_instance_id()
+    status: not_applicable
+    notes: Get instance ID
+  - key: Joystick.get_guid
+    label: Joystick.get_guid()
+    status: not_applicable
+    notes: Get GUID
+  - key: Joystick.get_power_level
+    label: Joystick.get_power_level()
+    status: not_applicable
+    notes: Get battery level
+  - key: Joystick.get_name
+    label: Joystick.get_name()
+    status: not_applicable
+    notes: Get joystick name
+  - key: Joystick.get_numaxes
+    label: Joystick.get_numaxes()
+    status: not_applicable
+    notes: Number of axes
+  - key: Joystick.get_axis
+    label: Joystick.get_axis(axis)
+    status: not_applicable
+    notes: Get axis value
+  - key: Joystick.get_numballs
+    label: Joystick.get_numballs()
+    status: not_applicable
+    notes: Number of trackballs
+  - key: Joystick.get_ball
+    label: Joystick.get_ball(ball)
+    status: not_applicable
+    notes: Get ball movement
+  - key: Joystick.get_numbuttons
+    label: Joystick.get_numbuttons()
+    status: not_applicable
+    notes: Number of buttons
+  - key: Joystick.get_button
+    label: Joystick.get_button(button)
+    status: not_applicable
+    notes: Get button state
+  - key: Joystick.get_numhats
+    label: Joystick.get_numhats()
+    status: not_applicable
+    notes: Number of hats
+  - key: Joystick.get_hat
+    label: Joystick.get_hat(hat)
+    status: not_applicable
+    notes: Get hat position
+  - key: Joystick.rumble
+    label: Joystick.rumble(low, high, duration)
+    status: not_applicable
+    notes: Rumble effect
+  - key: Joystick.stop_rumble
+    label: Joystick.stop_rumble()
+    status: not_applicable
+    notes: Stop rumble
+- title: pygame.camera
+  table_label: Item
+  items:
+  - key: Function/Class
+    label: Function/Class
+    status: not_implemented
+    notes: Notes
+  - key: camera.init
+    label: camera.init()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: camera.get_backends
+    label: camera.get_backends()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: camera.colorspace
+    label: camera.colorspace(surface, format, dest_surface)
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: camera.list_cameras
+    label: camera.list_cameras()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera
+    label: Camera(device, size, format)
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.start
+    label: Camera.start()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.stop
+    label: Camera.stop()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.get_controls
+    label: Camera.get_controls()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.set_controls
+    label: Camera.set_controls()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.get_size
+    label: Camera.get_size()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.query_image
+    label: Camera.query_image()
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.get_image
+    label: Camera.get_image(surface)
+    status: not_implemented
+    notes: Raises NotImplementedError
+  - key: Camera.get_raw
+    label: Camera.get_raw()
+    status: not_implemented
+    notes: Raises NotImplementedError
+- title: pygame.freetype
+  table_label: Item
+  items:
+  - key: Function/Class
+    label: Function/Class
+    status: not_implemented
+    notes: Notes
+  - key: freetype.init
+    label: freetype.init()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.quit
+    label: freetype.quit()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.get_init
+    label: freetype.get_init()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.get_default_font
+    label: freetype.get_default_font()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.get_default_resolution
+    label: freetype.get_default_resolution()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.set_default_resolution
+    label: freetype.set_default_resolution(dpi)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: freetype.SysFont
+    label: freetype.SysFont(name, size, bold, italic)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: Font
+    label: Font(file, size, ...)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+- title: pygame.cursors
+  table_label: Item
+  items:
+  - key: Function/Class
+    label: Function/Class
+    status: not_implemented
+    notes: Notes
+  - key: cursors.compile
+    label: cursors.compile(strings, black, white, xor)
+    status: not_implemented
+    notes: Stub
+  - key: cursors.load_xbm
+    label: cursors.load_xbm(cursorfile, maskfile)
+    status: not_implemented
+    notes: Stub
+  - key: Cursor
+    label: Cursor(size, hotspot, xormasks, andmasks)
+    status: not_implemented
+    notes: Minimal stub class
+  - key: Cursor
+    label: Cursor(hotspot, surface)
+    status: not_implemented
+    notes: Create from surface
+  - key: Cursor
+    label: Cursor(constant)
+    status: not_implemented
+    notes: System cursor constant
+  - key: Cursor constants
+    label: Cursor constants
+    status: not_implemented
+    notes: SYSTEM_CURSOR_* constants
+- title: pygame.midi
+  table_label: Item
+  items:
+  - key: Function/Class
+    label: Function/Class
+    status: not_implemented
+    notes: Notes
+  - key: midi.init
+    label: midi.init()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.quit
+    label: midi.quit()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.get_init
+    label: midi.get_init()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.get_count
+    label: midi.get_count()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.get_default_input_id
+    label: midi.get_default_input_id()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.get_default_output_id
+    label: midi.get_default_output_id()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.get_device_info
+    label: midi.get_device_info(device_id)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.midis2events
+    label: midi.midis2events(midi_events, device_id)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.time
+    label: midi.time()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.frequency_to_midi
+    label: midi.frequency_to_midi(freq)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.midi_to_frequency
+    label: midi.midi_to_frequency(midi_note)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: midi.midi_to_ansi_note
+    label: midi.midi_to_ansi_note(midi_note)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: Input
+    label: Input(device_id, buffer_size)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: Output
+    label: Output(device_id, latency, buffer_size)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+- title: pygame.sndarray
+  table_label: Function
+  items:
+  - key: sndarray.array
+    label: sndarray.array(sound)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: sndarray.samples
+    label: sndarray.samples(sound)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: sndarray.make_sound
+    label: sndarray.make_sound(array)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: sndarray.use_arraytype
+    label: sndarray.use_arraytype(arraytype)
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: sndarray.get_arraytype
+    label: sndarray.get_arraytype()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+  - key: sndarray.get_arraytypes
+    label: sndarray.get_arraytypes()
+    status: not_implemented
+    notes: Stub raises NotImplementedError
+- title: pygame.scrap
+  table_label: Function
+  items:
+  - key: scrap.init
+    label: scrap.init()
+    status: not_implemented
+    notes: Not present
+  - key: scrap.quit
+    label: scrap.quit()
+    status: not_implemented
+    notes: Not present
+  - key: scrap.get_init
+    label: scrap.get_init()
+    status: not_implemented
+    notes: Not present
+  - key: scrap.get
+    label: scrap.get(type)
+    status: not_implemented
+    notes: Not present
+  - key: scrap.put
+    label: scrap.put(type, data)
+    status: not_implemented
+    notes: Not present
+  - key: scrap.contains
+    label: scrap.contains(type)
+    status: not_implemented
+    notes: Not present
+  - key: scrap.lost
+    label: scrap.lost()
+    status: not_implemented
+    notes: Not present
+  - key: scrap.set_mode
+    label: scrap.set_mode(mode)
+    status: not_implemented
+    notes: Not present
+- title: pygame.Window
+  table_label: Method
+  items:
+  - key: Window
+    label: Window(title, size, ...)
+    status: not_implemented
+    notes: Window management class
+  - key: Window.from_display_module
+    label: Window.from_display_module()
+    status: not_implemented
+    notes: Get window from display
+  - key: Window.grab_keyboard
+    label: Window.grab_keyboard()
+    status: not_implemented
+    notes: Keyboard grab
+  - key: Window.release_keyboard
+    label: Window.release_keyboard()
+    status: not_implemented
+    notes: Release keyboard
+  - key: Window.set_windowed
+    label: Window.set_windowed()
+    status: not_implemented
+    notes: Windowed mode
+  - key: Window.set_fullscreen
+    label: Window.set_fullscreen(desktop)
+    status: not_implemented
+    notes: Fullscreen mode
+  - key: Window.get_surface
+    label: Window.get_surface()
+    status: not_implemented
+    notes: Get window surface
+  - key: Window.flip
+    label: Window.flip()
+    status: not_implemented
+    notes: Flip window
+  - key: Window.destroy
+    label: Window.destroy()
+    status: not_implemented
+    notes: Destroy window
+  - key: Window.hide
+    label: Window.hide()
+    status: not_implemented
+    notes: Hide window
+  - key: Window.show
+    label: Window.show()
+    status: not_implemented
+    notes: Show window
+  - key: Window.focus
+    label: Window.focus()
+    status: not_implemented
+    notes: Focus window
+  - key: Window.restore
+    label: Window.restore()
+    status: not_implemented
+    notes: Restore window
+  - key: Window.maximize
+    label: Window.maximize()
+    status: not_implemented
+    notes: Maximize window
+  - key: Window.minimize
+    label: Window.minimize()
+    status: not_implemented
+    notes: Minimize window
+  - key: Window.set_title
+    label: Window.set_title(title)
+    status: not_implemented
+    notes: Set title
+  - key: Window.title
+    label: Window.title
+    status: not_implemented
+    notes: Window title property
+  - key: Window.set_icon
+    label: Window.set_icon(surface)
+    status: not_implemented
+    notes: Set icon
+  - key: Window.size
+    label: Window.size
+    status: not_implemented
+    notes: Window size property
+  - key: Window.position
+    label: Window.position
+    status: not_implemented
+    notes: Window position property
+  - key: Window.opacity
+    label: Window.opacity
+    status: not_implemented
+    notes: Window opacity property
+  - key: Window.resizable
+    label: Window.resizable
+    status: not_implemented
+    notes: Resizable property
+  - key: Window.borderless
+    label: Window.borderless
+    status: not_implemented
+    notes: Borderless property
+- title: pygame.geometry
+  table_label: Class/Method
+  items:
+  - key: Circle
+    label: Circle(x, y, r)
+    status: not_implemented
+    notes: Circle class
+  - key: Circle.x, Circle.y, Circle.r
+    label: Circle.x, Circle.y, Circle.r
+    status: not_implemented
+    notes: Properties
+  - key: Circle.center
+    label: Circle.center
+    status: not_implemented
+    notes: Center point
+  - key: Circle.r_sqr
+    label: Circle.r_sqr
+    status: not_implemented
+    notes: Radius squared
+  - key: Circle.area
+    label: Circle.area
+    status: not_implemented
+    notes: Calculate area
+  - key: Circle.circumference
+    label: Circle.circumference
+    status: not_implemented
+    notes: Calculate circumference
+  - key: Circle.rotate
+    label: Circle.rotate(angle)
+    status: not_implemented
+    notes: Rotate around point
+  - key: Circle.rotate_ip
+    label: Circle.rotate_ip(angle)
+    status: not_implemented
+    notes: Rotate in-place
+  - key: Circle.update
+    label: Circle.update(x, y, r)
+    status: not_implemented
+    notes: Update values
+  - key: Circle.move
+    label: Circle.move(x, y)
+    status: not_implemented
+    notes: Move circle
+  - key: Circle.move_ip
+    label: Circle.move_ip(x, y)
+    status: not_implemented
+    notes: Move in-place
+  - key: Circle.collidepoint
+    label: Circle.collidepoint(x, y)
+    status: not_implemented
+    notes: Point collision
+  - key: Circle.colliderect
+    label: Circle.colliderect(rect)
+    status: not_implemented
+    notes: Rect collision
+  - key: Circle.collidecircle
+    label: Circle.collidecircle(circle)
+    status: not_implemented
+    notes: Circle collision
+  - key: Circle.intersect
+    label: Circle.intersect(circle)
+    status: not_implemented
+    notes: Circle intersection
+  - key: Circle.as_rect
+    label: Circle.as_rect()
+    status: not_implemented
+    notes: Bounding rect
+  - key: Circle.as_frect
+    label: Circle.as_frect()
+    status: not_implemented
+    notes: Bounding frect
+  - key: Line
+    label: Line(x1, y1, x2, y2)
+    status: not_implemented
+    notes: Line segment class
+  - key: Line.a, Line.b
+    label: Line.a, Line.b
+    status: not_implemented
+    notes: Endpoint properties
+  - key: Line.update
+    label: Line.update(x1, y1, x2, y2)
+    status: not_implemented
+    notes: Update endpoints
+  - key: Line.move
+    label: Line.move(x, y)
+    status: not_implemented
+    notes: Move line
+  - key: Line.move_ip
+    label: Line.move_ip(x, y)
+    status: not_implemented
+    notes: Move in-place
+  - key: Line.flip_ab
+    label: Line.flip_ab()
+    status: not_implemented
+    notes: Swap endpoints
+  - key: Line.flip_ab_ip
+    label: Line.flip_ab_ip()
+    status: not_implemented
+    notes: Swap in-place
+- title: pygame.system
+  table_label: Function
+  items:
+  - key: system.get_cpu_instruction_sets
+    label: system.get_cpu_instruction_sets()
+    status: not_implemented
+    notes: CPU feature detection
+  - key: system.get_total_ram
+    label: system.get_total_ram()
+    status: not_implemented
+    notes: Total system RAM
+  - key: system.get_pref_path
+    label: system.get_pref_path(org, app)
+    status: not_implemented
+    notes: Get preferences path
+  - key: system.get_pref_locales
+    label: system.get_pref_locales()
+    status: not_implemented
+    notes: Get locale preferences
+  - key: system.get_power_state
+    label: system.get_power_state()
+    status: not_implemented
+    notes: Battery/power info
+- title: Summary Statistics
+  table_label: Item
+  items:
+  - key: Status
+    label: Status
+    status: not_implemented
+    notes: Percentage
+  - key: "\u2705 Fully Implemented"
+    label: "\u2705 Fully Implemented"
+    status: not_implemented
+    notes: 45.2%
+  - key: "\U0001F536 Partially Implemented"
+    label: "\U0001F536 Partially Implemented"
+    status: not_implemented
+    notes: 6.9%
+  - key: "\u274C Not Implemented"
+    label: "\u274C Not Implemented"
+    status: not_implemented
+    notes: 24.0%
+  - key: "\U0001F6AB Not Applicable"
+    label: "\U0001F6AB Not Applicable (Jupyter limitations)"
+    status: not_implemented
+    notes: 24.0%
+  - key: Category
+    label: Category
+    status: not_implemented
+    notes: Status
+  - key: Core
+    label: Core (init, quit, error)
+    status: not_implemented
+    notes: "\u2705 Excellent"
+  - key: Display & Surface
+    label: Display & Surface
+    status: not_implemented
+    notes: "\u2705 Very Good"
+  - key: Drawing
+    label: Drawing (draw, gfxdraw)
+    status: not_implemented
+    notes: "\u2705 Excellent"
+  - key: Events & Input
+    label: Events & Input
+    status: not_implemented
+    notes: "\u2705 Good"
+  - key: Time & Clock
+    label: Time & Clock
+    status: not_implemented
+    notes: "\u2705 Excellent"
+  - key: Fonts
+    label: Fonts
+    status: not_implemented
+    notes: "\U0001F536 Good"
+  - key: Images & Transform
+    label: Images & Transform
+    status: not_implemented
+    notes: "\u2705 Excellent"
+  - key: Sprites & Collision
+    label: Sprites & Collision
+    status: not_implemented
+    notes: "\U0001F536 Good"
+  - key: Colors & Rects
+    label: Colors & Rects
+    status: not_implemented
+    notes: "\u2705 Excellent"
+  - key: Math
+    label: Math (Vector2/3)
+    status: not_implemented
+    notes: "\U0001F536 Fair"
+  - key: Masks
+    label: Masks
+    status: not_implemented
+    notes: "\U0001F536 Limited"
+  - key: Audio
+    label: Audio (mixer, music, sndarray)
+    status: not_implemented
+    notes: "\U0001F6AB N/A"
+  - key: Joystick
+    label: Joystick
+    status: not_implemented
+    notes: "\U0001F6AB N/A"
+  - key: Camera
+    label: Camera
+    status: not_implemented
+    notes: "\U0001F6AB N/A"
+  - key: Advanced
+    label: Advanced (Window, geometry, system)
+    status: not_implemented
+    notes: "\u274C Not Implemented"

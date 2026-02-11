@@ -1,0 +1,60 @@
+---
+title: API Reference
+description: Complete API reference for all ipygame modules.
+sidebar:
+  order: 0
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This section contains the auto-generated API reference for every
+public module in **ipygame**.
+
+ipygame re-implements the [pygame-ce](https://pyga.me/) API on top of
+[ipycanvas](https://ipycanvas.readthedocs.io/) so your games can run
+inside Jupyter notebooks.
+
+<Aside>For a detailed documentation of all of the functions please have a look at the API reference from `pygame-ce`: https://pyga.me/docs/.
+ipygame cannot implement all available functions from pygame. Please have a look at the API coverage document as well. </Aside>
+
+## Core Modules
+
+| Module | Description |
+|--------|-------------|
+| [display](display/) | Create and manage the display surface |
+| [Surface](surface/) | 2-D image stored as a NumPy RGBA pixel buffer |
+| [Rect / FRect](rect/) | Rectangle classes for positioning and collision |
+| [Color](color/) | RGBA color with rich conversion support |
+| [draw](draw/) | Shape-drawing functions |
+| [event](event/) | Event queue and input events |
+| [font](font/) | TrueType font rendering |
+| [image](image/) | Image loading and saving |
+| [time](time/) | Clock and timing utilities |
+| [key](key/) | Keyboard state and key constants |
+| [mouse](mouse/) | Mouse state and cursor |
+| [Mask](mask/) | Bitmask for pixel-perfect collision |
+| [transform](transform/) | Surface transformations (scale, rotate, blur, …) |
+| [sprite](sprite/) | Sprite and Group classes |
+| [math](math/) | Vector2 and Vector3 |
+
+## Additional Modules
+
+| Module | Description |
+|--------|-------------|
+| [gfxdraw](gfxdraw/) | Anti-aliased and filled primitives |
+| [surfarray](surfarray/) | NumPy array access to pixel data |
+| [pixelcopy](pixelcopy/) | Low-level pixel copy utilities |
+| [constants](constants/) | All pygame constants (keys, events, flags) |
+
+## Stub Modules
+
+These modules exist for import compatibility but raise
+`NotImplementedError` when used.
+
+| Module | Description |
+|--------|-------------|
+| [camera](camera/) | Camera capture (not available in Jupyter) |
+| [cursors](cursors/) | Hardware cursors |
+| [freetype](freetype/) | FreeType font rendering |
+| [midi](midi/) | MIDI input / output |
+| [sndarray](sndarray/) | Sound sample arrays |
