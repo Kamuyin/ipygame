@@ -218,3 +218,7 @@ __marimo__/
 # Generated API docs
 docs/src/content/docs/api/*.md
 docs/src/content/docs/api_coverage.md
+
+# JupyterLite build artifacts
+docs/.jupyterlite.doit.db
+docs/public/jupyterlite/
