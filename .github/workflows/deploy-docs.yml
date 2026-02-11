@@ -47,6 +47,9 @@ jobs:
         working-directory: docs
         run: bun run generate:coverage
 
+      - name: Build JupyterLite
+        run: uv run bash docs/scripts/build_jupyterlite.sh
+
       - name: Build docs
         working-directory: docs
         run: bun run build
