@@ -4,7 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://kamuyin.github.io',
+	site: 'https://kamuyin.github.io/ipygame/',
 	base: '/ipygame/',
 	integrations: [
 		starlight({
@@ -19,7 +19,7 @@ export default defineConfig({
 				},
 				{
 					label: 'API Coverage',
-					link: '/api_coverage',
+					link: 'api_coverage',
 				},
 				{
 					label: 'API Reference',
