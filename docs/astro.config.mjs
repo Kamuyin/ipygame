@@ -4,6 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://kamuyin.github.io',
+	base: '/ipygame/',
 	integrations: [
 		starlight({
 			title: 'ipygame',
