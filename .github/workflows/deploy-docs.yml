@@ -1,0 +1,67 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: uv sync --group dev
+
+      - name: Install docs deps
+        working-directory: docs
+        run: bun install --frozen-lockfile
+
+      - name: Generate API docs
+        working-directory: docs
+        run: bun run generate:api
+
+      - name: Generate API coverage
+        working-directory: docs
+        run: bun run generate:coverage
+
+      - name: Build docs
+        working-directory: docs
+        run: bun run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
