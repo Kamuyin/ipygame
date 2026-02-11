@@ -1,0 +1,12 @@
+{
+  "@jupyterlite/pyodide-kernel-extension:kernel": {
+    "packages": [
+      "ipygame",
+      "ipycanvas",
+      "ipywidgets",
+      "widgetsnbextension",
+      "jupyterlab_widgets",
+      "Pillow"
+    ]
+  }
+}

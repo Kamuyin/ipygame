@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "build:jupyterlite": "powershell -ExecutionPolicy Bypass -File scripts/build_jupyterlite.ps1",
+    "build:jupyterlite:sh": "bash scripts/build_jupyterlite.sh",
     "generate:api": "cd .. && uv run python docs/scripts/generate_api_docs.py",
     "generate:coverage": "cd .. && uv run python docs/scripts/generate_api_coverage.py"
   },

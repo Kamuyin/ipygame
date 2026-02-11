@@ -12,10 +12,12 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Kamuyin/ipygame' }],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						{ label: 'Quickstart', slug: 'quickstart' },
-					],
+					label: 'Quick Start',
+					link: 'quickstart',
+				},
+				{
+					label: 'Examples',
+					link: 'examples',
 				},
 				{
 					label: 'API Coverage',

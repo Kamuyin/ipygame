@@ -1,0 +1,9 @@
+{
+  "jupyterlite": {
+    "appName": "ipygame JupyterLite",
+    "enableMemoryCache": true
+  },
+  "jupyter-config-data": {
+    "defaultKernelName": "python"
+  }
+}
