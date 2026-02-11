@@ -1,26 +1,49 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+# Resolve directories
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Go up two levels from docs/scripts -> root
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
 if [[ -n "${VIRTUAL_ENV:-}" ]]; then
-  venv_python="$VIRTUAL_ENV/bin/python"
+    PYTHON_EXEC="$VIRTUAL_ENV/bin/python"
+    JUPYTER_EXEC="$VIRTUAL_ENV/bin/jupyter"
 else
-  venv_python="$repo_root/.venv/bin/python"
+    # Fallback/CI assumption: python/jupyter are on PATH
+    PYTHON_EXEC="python"
+    JUPYTER_EXEC="jupyter"
 fi
-contents_dir="$repo_root/docs/jupyterlite/contents"
-output_dir="$repo_root/docs/public/jupyterlite"
-wheels_dir="$output_dir/wheels"
 
-mkdir -p "$output_dir" "$wheels_dir"
+CONTENTS_DIR="$REPO_ROOT/docs/jupyterlite/contents"
+OUTPUT_DIR="$REPO_ROOT/docs/public/jupyterlite"
+WHEELS_DIR="$REPO_ROOT/docs/jupyterlite/wheels"
 
-"$venv_python" -m pip install --quiet --upgrade build
-"$venv_python" -m build --wheel --outdir "$wheels_dir" "$repo_root"
+echo "Cleaning up previous builds..."
+rm -rf "$OUTPUT_DIR"
+rm -rf "$WHEELS_DIR"
 
-wheel_paths=("$wheels_dir"/ipygame-*.whl)
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "$WHEELS_DIR"
 
-"$venv_python" -m jupyter lite build \
-  --config "$repo_root/docs/jupyterlite/jupyter_lite_config.json" \
-  --settings-overrides "$repo_root/docs/jupyterlite/overrides.json" \
-  --piplite-wheels "${wheel_paths[@]}" \
-  --contents "$contents_dir" \
-  --output-dir "$output_dir"
+echo "Building ipygame wheel..."
+"$PYTHON_EXEC" -m pip install --quiet --upgrade build
+"$PYTHON_EXEC" -m build --wheel --outdir "$WHEELS_DIR" "$REPO_ROOT"
+
+# Find the built wheel
+WHEEL_PATH=$(find "$WHEELS_DIR" -name "*.whl" | head -n 1)
+
+echo "Running JupyterLite build..."
+CMD=("$JUPYTER_EXEC" "lite" "build" \
+    "--config" "$REPO_ROOT/docs/jupyterlite/jupyter_lite_config.json" \
+    "--contents" "$CONTENTS_DIR" \
+    "--output-dir" "$OUTPUT_DIR")
+
+if [[ -f "$WHEEL_PATH" ]]; then
+    echo "Including local wheel: $WHEEL_PATH"
+    CMD+=("--piplite-wheels" "$WHEEL_PATH")
+fi
+
+"${CMD[@]}"
+
+echo "JupyterLite build complete."
