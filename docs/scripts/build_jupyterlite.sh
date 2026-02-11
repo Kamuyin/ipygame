@@ -27,7 +27,6 @@ mkdir -p "$OUTPUT_DIR"
 mkdir -p "$WHEELS_DIR"
 
 echo "Building ipygame wheel..."
-"$PYTHON_EXEC" -m pip install --quiet --upgrade build
 "$PYTHON_EXEC" -m build --wheel --outdir "$WHEELS_DIR" "$REPO_ROOT"
 
 # Find the built wheel
