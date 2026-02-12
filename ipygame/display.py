@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import io
 import warnings
 from typing import Sequence
 
 import numpy as np
+from PIL import Image as PILImage
 
 from ipygame._backend import get_backend
 from ipygame.rect import Rect
@@ -18,7 +20,12 @@ __all__ = [
     "set_icon", "iconify", "toggle_fullscreen",
     "Info", "get_driver",
     "get_window_size",
+    "set_compression",
 ]
+
+_use_compression: bool = True
+_compression_format: str = "PNG"
+_image_widget = None
 
 
 def init() -> None:
@@ -28,12 +35,14 @@ def init() -> None:
 
 def quit() -> None:
     """Uninitialise the display module."""
+    global _image_widget
     b = get_backend()
     if b.canvas is not None:
         try:
             b.canvas.clear()
         except Exception:
             pass
+    _image_widget = None
     b.mark_quit()
 
 
@@ -52,7 +61,9 @@ def set_mode(
 
     The canvas widget is automatically shown in the notebook output.
     """
+    global _image_widget
     from ipycanvas import Canvas, hold_canvas
+    from ipycanvas.canvas import Image
     from IPython.display import display as ipy_display
 
     b = get_backend()
@@ -73,6 +84,9 @@ def set_mode(
     surf._is_display = True
     surf._pixels[:, :] = (0, 0, 0, 255)
     b.display_surface = surf
+
+    _placeholder = b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\nIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82"
+    _image_widget = Image(value=_placeholder, format="png")
 
     from ipygame.event import _wire_canvas_events
     _wire_canvas_events(canvas)
@@ -101,11 +115,36 @@ def update(rectangle=None) -> None:
 
 
 def _flush_surface_to_canvas(canvas, surface: Surface) -> None:
-    """Transfer the Surface pixel buffer to the ipycanvas Canvas."""
+    """Transfer the Surface pixel buffer to the ipycanvas Canvas.
+    
+    If compression is enabled (default), encodes the frame as PNG before
+    sending, which dramatically reduces bandwidth usage.
+    """
+    global _image_widget
     from ipycanvas import hold_canvas
 
-    with hold_canvas(canvas):
-        canvas.put_image_data(surface._pixels, 0, 0)
+    if _use_compression and _image_widget is not None:
+        # Encode frame as PNG
+        buf = io.BytesIO()
+        pil_img = PILImage.fromarray(surface._pixels, "RGBA")
+        pil_img.save(buf, _compression_format, optimize=False)
+        _image_widget.value = buf.getvalue()
+        
+        with hold_canvas(canvas):
+            canvas.clear()
+            canvas.draw_image(_image_widget, 0, 0)
+    else:
+        # Raw pixel transfer
+        with hold_canvas(canvas):
+            canvas.put_image_data(surface._pixels, 0, 0)
+
+
+def set_compression(enabled: bool = True, format: str = "PNG") -> None:
+    """Configure frame compression for network transfer."""
+    global _use_compression, _compression_format
+    _use_compression = enabled
+    if format.upper() in ("PNG", "WEBP"):
+        _compression_format = format.upper()
 
 
 def set_caption(title: str, icontitle: str = "") -> None:
