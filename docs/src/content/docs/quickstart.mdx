@@ -1,0 +1,153 @@
+---
+title: Quickstart
+description: Get a canvas on screen, draw shapes, and run a small interactive loop.
+---
+
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+ipygame is a **pygame-style API designed for Jupyter notebooks**.
+Instead of opening a desktop window, it renders to an `ipycanvas` widget output,
+which makes it a good fit for JupyterLab and hosted classroom environments.
+
+## Install
+
+<Tabs>
+<TabItem label="Local Jupyter (CPython)">
+
+If you are running a normal Python kernel (e.g. ipykernel, pypy), install from GitHub:
+
+```bash
+pip install git+https://github.com/Kamuyin/ipygame.git
+```
+
+</TabItem>
+<TabItem label="JupyterLite (Pyodide)">
+
+In JupyterLite from the demo, install into the current kernel session:
+
+```python
+%pip install ipygame
+```
+
+<Aside>
+JupyterLite runs Python in the browser. Installation is per-session, so you may need to re-run
+the `%pip install` cell after a refresh.
+</Aside>
+
+</TabItem>
+</Tabs>
+
+## Your first frame
+
+<Steps>
+<ol>
+    <li>
+        Import ipygame and create a display surface.
+
+```python
+import ipygame as pygame
+
+screen = pygame.display.set_mode((420, 260))
+```
+    </li>
+    <li>
+        Draw a few primitives.
+
+```python
+screen.fill("midnightblue")
+pygame.draw.rect(screen, "gold", (30, 30, 140, 80))
+pygame.draw.circle(screen, "tomato", (280, 130), 50)
+```
+    </li>
+    <li>
+        Present the frame.
+
+```python
+pygame.display.flip()
+```
+    </li>
+</ol>
+</Steps>
+
+<Aside>
+In pygame, drawing updates the backbuffer. In ipygame, `pygame.display.flip()` is what pushes the
+current pixels to the canvas output.
+</Aside>
+
+## A tiny interactive loop (recommended pattern)
+
+In notebooks it’s usually best to run your game loop asynchronously.
+
+<Tabs>
+<TabItem label="Async loop (notebook-friendly)">
+
+```python
+import ipygame as pygame
+
+screen = pygame.display.set_mode((420, 260))
+clock = pygame.time.Clock()
+
+pos = [210, 130]
+
+async def loop(frames=240):
+    for _ in range(frames):
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                return
+            if ev.type == pygame.MOUSEMOTION:
+                pos[0], pos[1] = ev.pos
+            if ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
+                return
+
+        screen.fill((10, 10, 12))
+        pygame.draw.circle(screen, "lime", pos, 8)
+        pygame.display.flip()
+
+        await clock.tick_async(30)
+
+await loop()
+```
+
+</TabItem>
+<TabItem label="Sync loop (script-style)">
+
+```python
+import ipygame as pygame
+
+screen = pygame.display.set_mode((420, 260))
+clock = pygame.time.Clock()
+
+pos = [210, 130]
+running = True
+
+while running:
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT:
+            running = False
+        elif ev.type == pygame.MOUSEMOTION:
+            pos[0], pos[1] = ev.pos
+        elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
+            running = False
+
+    screen.fill((10, 10, 12))
+    pygame.draw.circle(screen, "lime", pos, 8)
+    pygame.display.flip()
+
+    clock.tick(30)
+```
+
+</TabItem>
+</Tabs>
+
+## Common notebook gotchas
+
+- Click the canvas once to focus it before typing (so keyboard events reach the widget).
+- Avoid infinite loops in a single cell; use a `frames=...` limit or a clear exit key.
+- If nothing appears, make sure you called `pygame.display.flip()`.
+- You might need to clear all outputs and restart the kernel if no canvas appears.
+
+## Next steps
+
+- Try the runnable notebooks on the [Examples](../examples/) page.
+- Check current feature status in [API Coverage](../api_coverage/).
+- Browse the full [API Reference](../api/).
