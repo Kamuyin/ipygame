@@ -3,6 +3,7 @@ from __future__ import annotations
 from ipygame.color import Color
 from ipygame.rect import Rect, FRect
 from ipygame.surface import Surface
+from ipygame.math import Vector2, Vector3
 
 from ipygame.constants import *  # noqa: F401,F403
 
