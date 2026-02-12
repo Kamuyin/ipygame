@@ -66,7 +66,9 @@ class ScancodeWrapper(tuple):
         for k, v in mapping.items():
             if 0 <= k < size:
                 data[k] = v
-        return super().__new__(cls, data)
+        obj = super().__new__(cls, data)
+        obj._mapping = {int(k): bool(v) for k, v in mapping.items() if int(k) >= 0}
+        return obj
 
     def __getitem__(self, index):
         if isinstance(index, slice):
@@ -74,7 +76,7 @@ class ScancodeWrapper(tuple):
         if index < 0:
             return super().__getitem__(index)
         if index >= len(self):
-            return False
+            return self._mapping.get(int(index), False)
         return super().__getitem__(index)
 
 
