@@ -3,6 +3,8 @@ from __future__ import annotations
 import time
 from typing import TYPE_CHECKING
 
+import numpy as np
+
 if TYPE_CHECKING:
     from ipycanvas import Canvas
     from ipygame.surface import Surface
@@ -24,6 +26,7 @@ class _Backend:
         self.initialized: bool = False
         self.init_ticks: float = 0.0
         self.quit_flag: bool = False
+        self.last_presented_pixels: np.ndarray | None = None
 
     def mark_init(self):
         self.initialized = True
@@ -35,6 +38,7 @@ class _Backend:
         self.quit_flag = True
         self.canvas = None
         self.display_surface = None
+        self.last_presented_pixels = None
 
 
 _backend = _Backend()
