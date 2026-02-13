@@ -262,6 +262,10 @@ def _wire_canvas_events(canvas) -> None:
                     pos=(ix, iy), rel=rel, buttons=buttons))
 
     def _on_mouse_down(x, y):
+        try:
+            canvas.focus()
+        except Exception:
+            pass
         ix, iy = int(x), int(y)
         _mouse_mod._update_pos(ix, iy)
         _mouse_mod._button_down(_c.BUTTON_LEFT)
