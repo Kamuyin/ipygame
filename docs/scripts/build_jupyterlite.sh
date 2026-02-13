@@ -27,6 +27,11 @@ rm -rf "$WHEELS_DIR"
 mkdir -p "$OUTPUT_DIR"
 mkdir -p "$WHEELS_DIR"
 
+echo "Ensuring host Python has pip..."
+if ! "$PYTHON_EXEC" -m pip --version >/dev/null 2>&1; then
+    "$PYTHON_EXEC" -m ensurepip --upgrade
+fi
+
 echo "Building ipygame wheel..."
 "$PYTHON_EXEC" -m build --wheel --outdir "$WHEELS_DIR" "$REPO_ROOT"
 

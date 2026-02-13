@@ -16,6 +16,12 @@ Remove-Item -Recurse -Force $wheelsDir -ErrorAction SilentlyContinue
 New-Item -Force -ItemType Directory $outputDir | Out-Null
 New-Item -Force -ItemType Directory $wheelsDir | Out-Null
 
+Write-Host "Ensuring host Python has pip..."
+& $venvPython -m pip --version *> $null
+if ($LASTEXITCODE -ne 0) {
+  & $venvPython -m ensurepip --upgrade
+}
+
 Write-Host "Building ipygame wheel..."
 & $venvPython -m build --wheel --outdir $wheelsDir $repoRoot
 
