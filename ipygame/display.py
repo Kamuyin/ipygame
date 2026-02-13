@@ -80,10 +80,6 @@ def set_mode(
     _wire_canvas_events(canvas)
 
     ipy_display(canvas)
-    try:
-        canvas.focus()
-    except Exception:
-        pass
 
     return surf
 

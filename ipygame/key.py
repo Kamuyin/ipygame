@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 import time as _time
 
 from ipygame import constants as _c
@@ -33,22 +32,7 @@ _repeat_interval: int = 0
 _text_input: bool = True
 _key_up_supported: bool = True
 _down_times: dict[int, float] = {}
-
-
-def _env_float(name: str, default: float) -> float:
-    raw = os.environ.get(name)
-    if raw is None:
-        return default
-    try:
-        return float(raw)
-    except (TypeError, ValueError):
-        return default
-
-
-_KEYUP_EMULATION_WINDOW_SEC: float = max(
-    0.1,
-    _env_float("IPYGAME_KEYUP_EMULATION_WINDOW_SEC", 0.6),
-)
+_KEYUP_EMULATION_WINDOW_SEC: float = 0.2
 
 _KEY_TO_NAME: dict[int, str] = {}
 _NAME_TO_KEY: dict[str, int] = {}
