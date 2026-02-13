@@ -18,6 +18,7 @@ fi
 CONTENTS_DIR="$REPO_ROOT/docs/jupyterlite/contents"
 OUTPUT_DIR="$REPO_ROOT/docs/public/jupyterlite"
 WHEELS_DIR="$REPO_ROOT/docs/jupyterlite/wheels"
+XEUS_ENV_FILE="$REPO_ROOT/docs/jupyterlite/environment.yml"
 
 echo "Cleaning up previous builds..."
 rm -rf "$OUTPUT_DIR"
@@ -31,17 +32,39 @@ echo "Building ipygame wheel..."
 
 # Find the built wheel
 WHEEL_PATH=$(find "$WHEELS_DIR" -name "*.whl" | head -n 1)
+WHEEL_BASENAME=""
+if [[ -n "${WHEEL_PATH:-}" && -f "$WHEEL_PATH" ]]; then
+    WHEEL_BASENAME="$(basename "$WHEEL_PATH")"
+fi
+
+if [[ -z "$WHEEL_BASENAME" ]]; then
+    echo "No wheel found in $WHEELS_DIR"
+    exit 1
+fi
+
+echo "Generating xeus environment: $XEUS_ENV_FILE"
+cat > "$XEUS_ENV_FILE" <<EOF
+name: xeus-python-kernel
+channels:
+  - https://prefix.dev/emscripten-forge-dev
+  - https://prefix.dev/conda-forge
+dependencies:
+  - xeus-python
+  - numpy
+  - pillow
+  - ipywidgets
+  - ipycanvas
+  - pip
+  - pip:
+      - ./wheels/$WHEEL_BASENAME
+EOF
 
 echo "Running JupyterLite build..."
 CMD=("$JUPYTER_EXEC" "lite" "build" \
     "--config" "$REPO_ROOT/docs/jupyterlite/jupyter_lite_config.json" \
     "--contents" "$CONTENTS_DIR" \
-    "--output-dir" "$OUTPUT_DIR")
-
-if [[ -f "$WHEEL_PATH" ]]; then
-    echo "Including local wheel: $WHEEL_PATH"
-    CMD+=("--piplite-wheels" "$WHEEL_PATH")
-fi
+    "--output-dir" "$OUTPUT_DIR" \
+    "--XeusAddon.environment_file" "$XEUS_ENV_FILE")
 
 "${CMD[@]}"
 

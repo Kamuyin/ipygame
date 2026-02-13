@@ -16,12 +16,6 @@ For local notebooks (CPython kernels), install from this repository:
 pip install git+https://github.com/Kamuyin/ipygame.git
 ```
 
-In JupyterLite (Pyodide, like from the demo), you usually need to install into the kernel session as well:
-
-```python
-%pip install ipygame
-```
-
 ## Quick start
 
 ```python
