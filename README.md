@@ -1,5 +1,7 @@
 # ipygame
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Kamuyin/ipygame/master?urlpath=lab)
+
 ipygame is a pygame-style API for writing small games inside Jupyter notebooks, primarily for teaching and classroom use. Instead of SDL2, it renders to an `ipycanvas` canvas output, so it works in environments where you do not have a desktop window (e.g. JupyterLab, hosted JupyterHub).
 
 ![Snake demo running in a notebook](docs/public/showcase_snake.png)
