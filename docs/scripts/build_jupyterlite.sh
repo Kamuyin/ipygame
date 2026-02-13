@@ -61,7 +61,7 @@ dependencies:
   - ipycanvas
   - pip
   - pip:
-      - ./wheels/$WHEEL_BASENAME
+    - ./docs/jupyterlite/wheels/$WHEEL_BASENAME
 EOF
 
 echo "Running JupyterLite build..."

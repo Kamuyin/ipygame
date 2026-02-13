@@ -45,7 +45,7 @@ dependencies:
   - ipycanvas
   - pip
   - pip:
-      - ./wheels/$wheelName
+      - ./docs/jupyterlite/wheels/$wheelName
 "@
 
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
