@@ -11,8 +11,12 @@ The goal is API familiarity, not perfect drop-in compatibility. Many common draw
 
 ## Install
 
-For local notebooks (CPython kernels), install from this repository:
+For local notebooks (CPython kernels), install from PyPI:
 
+```bash
+pip install ipygame
+```
+or from source:
 ```bash
 pip install git+https://github.com/Kamuyin/ipygame.git
 ```
