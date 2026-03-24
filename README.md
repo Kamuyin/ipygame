@@ -4,9 +4,10 @@
 
 ipygame is a pygame-style API for writing small games inside Jupyter notebooks, primarily for teaching and classroom use. Instead of SDL2, it renders to an `ipycanvas` canvas output, so it works in environments where you do not have a desktop window (e.g. JupyterLab, hosted JupyterHub).
 
-![Snake demo running in a notebook](docs/public/showcase_snake.png)
+![PacMan running with `ipgame`. Credit: https://github.com/AnandSrikumar/PyPacman](docs/public/showcase_pacman.png)
+**PacMan running with `ipygame`. Credit: <https://github.com/AnandSrikumar/PyPacman>**
 
-The goal is API familiarity, not perfect drop-in compatibility. Many common drawing and event patterns work, but the browser and the widget stack impose limits.
+The goal is API familiarity, not perfect drop-in compatibility. Many common drawing and event patterns work, but the browser and the widget stack impose limits. Audio works as well; but it's currently experimental.
 
 ## Install
 
@@ -26,6 +27,15 @@ screen.fill("midnightblue")
 pygame.draw.rect(screen, "gold", (30, 30, 140, 80))
 pygame.draw.circle(screen, "tomato", (280, 130), 50)
 pygame.display.flip()
+```
+
+You might also want to temporarily register `ipygame` as the `pygame` package if you already have a codebase that uses pygame.
+
+```python
+import ipygame
+pygame.install_hook()
+
+# Then the kernel always uses `ipygame` without the need to adjust your codebase.
 ```
 
 ## Examples
