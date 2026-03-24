@@ -44,8 +44,6 @@ Performance can be noticeably lower than desktop pygame. Rendering happens throu
 
 If you run the examples in JupyterLite (Pyodide), you may see rendering work while real-time keyboard/mouse input does not. This is a limitation of the Pyodide kernel + widget message processing for long-running loops, and it is not something ipygame can reliably fix from Python alone.
 
-Audio is work in progress.
-
 ## Acknowledgements
 
 ipygame is based on the work by the pygame and pygame-ce projects and aims to provide a familiar API for educational notebooks. This project is not affiliated with, endorsed by, or a replacement for pygame/pygame-ce.
