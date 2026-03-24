@@ -41,7 +41,7 @@ from ipygame import (
     sprite,
 )
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 from ipygame._backend import get_backend as _get_backend
 import time as _stdlib_time
