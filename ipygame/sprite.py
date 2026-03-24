@@ -49,14 +49,14 @@ class Group:
     """Minimal pygame-compatible Group (aka RenderPlain)."""
 
     def __init__(self, *sprites: Sprite) -> None:
-        self._sprites: set[Sprite] = set()
+        self._sprites: dict[Sprite, None] = {}
         self.add(*sprites)
 
     def add(self, *sprites: Sprite) -> None:
         for s in sprites:
             if isinstance(s, Sprite):
                 if s not in self._sprites:
-                    self._sprites.add(s)
+                    self._sprites[s] = None
                     s.add(self)
             elif hasattr(s, "__iter__"):
                 self.add(*s)
@@ -65,7 +65,7 @@ class Group:
         for s in sprites:
             if isinstance(s, Sprite):
                 if s in self._sprites:
-                    self._sprites.discard(s)
+                    del self._sprites[s]
                     s.remove(self)
             elif hasattr(s, "__iter__"):
                 self.remove(*s)
