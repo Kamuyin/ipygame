@@ -1,7 +1,7 @@
 meta:
   title: API Coverage
   description: Overview
-  last_updated: February 11, 2026
+  last_updated: March 24, 2026
 sections:
 - title: Core Module (pygame)
   table_label: Function
@@ -83,12 +83,12 @@ sections:
     notes: Updates display (currently full screen)
   - key: display.get_driver
     label: display.get_driver()
-    status: not_implemented
-    notes: Returns "ipycanvas"
+    status: implemented
+    notes: Returns 'ipycanvas'
   - key: display.Info
     label: display.Info()
-    status: not_implemented
-    notes: Returns basic info object
+    status: implemented
+    notes: Returns basic VidInfo object
   - key: display.get_wm_info
     label: display.get_wm_info()
     status: not_implemented
@@ -119,12 +119,12 @@ sections:
     notes: Window focus state
   - key: display.iconify
     label: display.iconify()
-    status: not_implemented
-    notes: Stub (no effect in Jupyter)
+    status: implemented
+    notes: Stub; returns False (no effect in Jupyter)
   - key: display.toggle_fullscreen
     label: display.toggle_fullscreen()
-    status: not_implemented
-    notes: Stub (no effect in Jupyter)
+    status: implemented
+    notes: Stub; returns 0 (no effect in Jupyter)
   - key: display.set_gamma
     label: display.set_gamma(red, green, blue)
     status: not_implemented
@@ -135,8 +135,8 @@ sections:
     notes: Gamma ramp N/A
   - key: display.set_icon
     label: display.set_icon(surface)
-    status: not_implemented
-    notes: Stored but not displayed
+    status: implemented
+    notes: Stores icon surface; not displayed
   - key: display.set_caption
     label: display.set_caption(title, icontitle)
     status: implemented
@@ -190,8 +190,8 @@ sections:
     notes: Multiple blits
   - key: fblits
     label: fblits(sequence, doreturn)
-    status: not_implemented
-    notes: Fast blits without return
+    status: implemented
+    notes: Fast blits without return value
   - key: convert
     label: convert(surface)
     status: implemented
@@ -210,8 +210,8 @@ sections:
     notes: Fills with solid color
   - key: scroll
     label: scroll(dx, dy)
-    status: not_implemented
-    notes: Surface scrolling
+    status: implemented
+    notes: Scrolls pixel buffer using np.roll
   - key: set_colorkey
     label: set_colorkey(color, flags)
     status: implemented
@@ -258,8 +258,8 @@ sections:
     notes: Sets pixel color
   - key: get_at_mapped
     label: get_at_mapped(pos)
-    status: not_implemented
-    notes: Returns RGBA tuple as int
+    status: implemented
+    notes: Returns RGBA pixel as packed int
   - key: get_palette
     label: get_palette()
     status: not_implemented
@@ -366,24 +366,24 @@ sections:
     notes: Returns bounding rect of non-transparent pixels
   - key: get_view
     label: get_view(kind)
-    status: not_implemented
-    notes: Buffer view access
+    status: implemented
+    notes: Returns memoryview of pixel buffer
   - key: get_buffer
     label: get_buffer()
-    status: not_implemented
-    notes: Raw buffer access
+    status: implemented
+    notes: Returns memoryview of pixel buffer
   - key: _pixels_address
     label: _pixels_address
     status: not_implemented
     notes: Memory address (not applicable)
   - key: premul_alpha
     label: premul_alpha()
-    status: not_implemented
-    notes: Premultiplied alpha conversion
+    status: implemented
+    notes: Returns premultiplied-alpha copy
   - key: blit_array
     label: blit_array(array, dest)
-    status: not_implemented
-    notes: Array blitting
+    status: implemented
+    notes: Blits numpy array onto surface
 - title: pygame.draw
   table_label: Function
   items:
@@ -547,8 +547,8 @@ sections:
     notes: Disable text input
   - key: key.set_text_input_rect
     label: key.set_text_input_rect(rect)
-    status: not_implemented
-    notes: Stored but no IME positioning
+    status: implemented
+    notes: Stored but no IME positioning in Jupyter
 - title: pygame.mouse
   table_label: Function
   items:
@@ -574,12 +574,12 @@ sections:
     notes: Returns relative movement
   - key: mouse.set_pos
     label: mouse.set_pos(pos)
-    status: not_implemented
-    notes: Stores position (can't move cursor in browser)
+    status: implemented
+    notes: Stores position; can't move cursor in browser
   - key: mouse.set_visible
     label: mouse.set_visible(bool)
-    status: not_implemented
-    notes: Stores state (limited browser control)
+    status: implemented
+    notes: Stores state; limited browser cursor control
   - key: mouse.get_visible
     label: mouse.get_visible()
     status: implemented
@@ -590,16 +590,16 @@ sections:
     notes: Returns True (assumes focus)
   - key: mouse.set_cursor
     label: mouse.set_cursor(cursor)
-    status: not_implemented
-    notes: Stored but limited browser control
+    status: implemented
+    notes: Stores cursor; limited browser control
   - key: mouse.get_cursor
     label: mouse.get_cursor()
     status: implemented
     notes: Returns current cursor
   - key: mouse.set_relative_mode
     label: mouse.set_relative_mode(bool)
-    status: not_implemented
-    notes: Stores state (limited in browser)
+    status: implemented
+    notes: Stores state; limited pointer-lock in browser
   - key: mouse.get_relative_mode
     label: mouse.get_relative_mode()
     status: implemented
@@ -716,28 +716,28 @@ sections:
     notes: Get italic state
   - key: Font.metrics
     label: Font.metrics(text)
-    status: not_implemented
-    notes: Character metrics
+    status: implemented
+    notes: Returns per-character metrics list
   - key: Font.get_linesize
     label: Font.get_linesize()
-    status: not_implemented
-    notes: Line spacing
+    status: implemented
+    notes: Returns line spacing in pixels
   - key: Font.get_height
     label: Font.get_height()
-    status: not_implemented
-    notes: Font height
+    status: implemented
+    notes: Returns font height in pixels
   - key: Font.get_ascent
     label: Font.get_ascent()
-    status: not_implemented
-    notes: Ascent metric
+    status: implemented
+    notes: Returns ascent metric in pixels
   - key: Font.get_descent
     label: Font.get_descent()
-    status: not_implemented
-    notes: Descent metric
+    status: implemented
+    notes: Returns descent metric in pixels
   - key: font.get_sdl_ttf_version
     label: font.get_sdl_ttf_version()
-    status: not_implemented
-    notes: Returns (0,0,0)
+    status: implemented
+    notes: Returns (0, 0, 0) — no SDL_ttf in ipygame
 - title: pygame.image
   table_label: Function
   items:
@@ -751,8 +751,8 @@ sections:
     notes: Save image using Pillow
   - key: image.get_extended
     label: image.get_extended()
-    status: not_implemented
-    notes: Returns True (Pillow supports extended formats)
+    status: implemented
+    notes: Returns True; Pillow supports extended formats
   - key: image.tostring
     label: image.tostring(surface, format, flipped)
     status: implemented
@@ -787,8 +787,8 @@ sections:
     notes: Save extended formats
   - key: image.load_sized_svg
     label: image.load_sized_svg(file, size)
-    status: not_implemented
-    notes: Stub raises NotImplementedError
+    status: implemented
+    notes: Requires cairosvg; raises NotImplementedError if not installed
 - title: pygame.transform
   table_label: Function
   items:
@@ -969,24 +969,24 @@ sections:
     notes: Group holding single sprite
   - key: RenderPlain
     label: RenderPlain
-    status: not_implemented
-    notes: Alias for Group
+    status: implemented
+    notes: Alias for Group (identical behavior)
   - key: RenderClear
     label: RenderClear
-    status: not_implemented
-    notes: Render with clear
+    status: implemented
+    notes: Alias for Group (identical behavior)
   - key: RenderUpdates
     label: RenderUpdates
-    status: implemented
-    notes: Group tracking dirty rects
+    status: not_implemented
+    notes: Not implemented; use Group
   - key: OrderedUpdates
     label: OrderedUpdates
-    status: implemented
-    notes: Ordered sprite group
+    status: not_implemented
+    notes: Not implemented; use Group
   - key: LayeredUpdates
     label: LayeredUpdates
-    status: implemented
-    notes: Layered sprite group
+    status: not_implemented
+    notes: Not implemented; use Group
   - key: LayeredDirty
     label: LayeredDirty
     status: not_implemented
@@ -997,24 +997,24 @@ sections:
     notes: Sprite-group collision
   - key: collide_rect
     label: collide_rect(left, right)
-    status: implemented
-    notes: Rectangle collision
+    status: not_implemented
+    notes: Not implemented as standalone; use rect-based collided= kwarg
   - key: collide_rect_ratio
     label: collide_rect_ratio(ratio)
     status: not_implemented
     notes: Scaled rect collision
   - key: collide_circle
     label: collide_circle(left, right)
-    status: implemented
-    notes: Circle collision
+    status: not_implemented
+    notes: Not implemented as standalone function
   - key: collide_circle_ratio
     label: collide_circle_ratio(ratio)
     status: not_implemented
     notes: Scaled circle collision
   - key: collide_mask
     label: collide_mask(left, right)
-    status: implemented
-    notes: Mask collision
+    status: not_implemented
+    notes: Not implemented as standalone function
   - key: groupcollide
     label: groupcollide(group1, group2, dokill1, dokill2, collided)
     status: implemented
@@ -1220,7 +1220,7 @@ sections:
   - key: premul_alpha
     label: premul_alpha()
     status: implemented
-    notes: Premultiply alpha
+    notes: Returns premultiplied-alpha copy
   - key: update
     label: update(r, g, b, a)
     status: implemented
@@ -1338,19 +1338,19 @@ sections:
     notes: Angle to other vector
   - key: as_polar
     label: as_polar()
-    status: not_implemented
+    status: implemented
     notes: Convert to polar (r, theta)
   - key: from_polar
     label: from_polar(polar)
-    status: not_implemented
+    status: implemented
     notes: Create from polar coordinates
   - key: lerp
     label: lerp(other, t)
-    status: not_implemented
+    status: implemented
     notes: Linear interpolation
   - key: slerp
     label: slerp(other, t)
-    status: not_implemented
+    status: implemented
     notes: Spherical interpolation
   - key: smoothstep
     label: smoothstep(other, t)
@@ -1362,20 +1362,20 @@ sections:
     notes: Element-wise operations
   - key: move_towards
     label: move_towards(target, max_distance)
-    status: not_implemented
-    notes: Move toward target
+    status: implemented
+    notes: Move toward target, max_distance limit
   - key: move_towards_ip
     label: move_towards_ip(target, max_distance)
-    status: not_implemented
+    status: implemented
     notes: Move toward in-place
   - key: clamp_magnitude
     label: clamp_magnitude(max_length)
-    status: not_implemented
-    notes: Clamp to max length
+    status: implemented
+    notes: Clamp vector to magnitude range
   - key: clamp_magnitude_ip
     label: clamp_magnitude_ip(max_length)
-    status: not_implemented
-    notes: Clamp in-place
+    status: implemented
+    notes: Clamp magnitude in-place
   - key: clamp
     label: clamp(min, max)
     status: not_implemented
@@ -1453,142 +1453,142 @@ sections:
     notes: Get bounding rect
   - key: mask.count
     label: mask.count()
-    status: not_implemented
-    notes: Count set bits
+    status: implemented
+    notes: Returns count of set bits
   - key: mask.centroid
     label: mask.centroid()
-    status: not_implemented
-    notes: Calculate centroid
+    status: implemented
+    notes: Returns centroid (x, y) of set bits
   - key: mask.angle
     label: mask.angle()
-    status: not_implemented
-    notes: Calculate orientation angle
+    status: implemented
+    notes: Returns orientation angle of set bits
   - key: mask.outline
     label: mask.outline(every)
-    status: not_implemented
-    notes: Get outline points
+    status: implemented
+    notes: Returns list of outline points
   - key: mask.convolve
     label: mask.convolve(other, output, offset)
-    status: not_implemented
-    notes: Convolve masks
+    status: implemented
+    notes: Convolve with another mask
   - key: mask.connected_component
     label: mask.connected_component(pos)
-    status: not_implemented
-    notes: Get connected component
+    status: implemented
+    notes: Returns mask of a connected component
   - key: mask.connected_components
     label: mask.connected_components(minimum)
-    status: not_implemented
-    notes: Get all components
+    status: implemented
+    notes: Returns list of connected component masks
   - key: mask.get_bounding_rects
     label: mask.get_bounding_rects()
-    status: not_implemented
-    notes: Get all bounding rects
+    status: implemented
+    notes: Returns bounding rects of all components
   - key: mask.draw
     label: mask.draw(other, offset)
-    status: not_implemented
-    notes: Draw mask onto this
+    status: implemented
+    notes: Draw other mask onto this mask
   - key: mask.erase
     label: mask.erase(other, offset)
-    status: not_implemented
-    notes: Erase other from this
+    status: implemented
+    notes: Erase other mask from this mask
   - key: mask.scale
     label: mask.scale(size)
-    status: not_implemented
-    notes: Scale mask
+    status: implemented
+    notes: Return scaled copy of mask
   - key: mask.to_surface
     label: mask.to_surface(...)
-    status: not_implemented
-    notes: Convert to surface
+    status: implemented
+    notes: Convert mask to Surface
 - title: pygame.gfxdraw
   table_label: Function
   items:
   - key: pixel
     label: pixel(surface, x, y, color)
-    status: not_implemented
+    status: implemented
     notes: Single pixel (uses set_at)
   - key: hline
     label: hline(surface, x1, x2, y, color)
-    status: not_implemented
+    status: implemented
     notes: Horizontal line
   - key: vline
     label: vline(surface, x, y1, y2, color)
-    status: not_implemented
+    status: implemented
     notes: Vertical line
   - key: rectangle
     label: rectangle(surface, rect, color)
-    status: not_implemented
+    status: implemented
     notes: Rectangle outline
   - key: box
     label: box(surface, rect, color)
-    status: not_implemented
+    status: implemented
     notes: Filled rectangle
   - key: line
     label: line(surface, x1, y1, x2, y2, color)
-    status: not_implemented
+    status: implemented
     notes: Line
   - key: circle
     label: circle(surface, x, y, r, color)
-    status: not_implemented
+    status: implemented
     notes: Circle outline
   - key: arc
     label: arc(surface, x, y, r, start, end, color)
-    status: not_implemented
+    status: implemented
     notes: Arc
   - key: aacircle
     label: aacircle(surface, x, y, r, color)
-    status: not_implemented
+    status: implemented
     notes: Anti-aliased circle
   - key: filled_circle
     label: filled_circle(surface, x, y, r, color)
-    status: not_implemented
+    status: implemented
     notes: Filled circle
   - key: ellipse
     label: ellipse(surface, x, y, rx, ry, color)
-    status: not_implemented
+    status: implemented
     notes: Ellipse outline
   - key: aaellipse
     label: aaellipse(surface, x, y, rx, ry, color)
-    status: not_implemented
+    status: implemented
     notes: Anti-aliased ellipse
   - key: filled_ellipse
     label: filled_ellipse(surface, x, y, rx, ry, color)
-    status: not_implemented
+    status: implemented
     notes: Filled ellipse
   - key: pie
     label: pie(surface, x, y, r, start, end, color)
-    status: not_implemented
+    status: implemented
     notes: Pie slice
   - key: trigon
     label: trigon(surface, x1, y1, x2, y2, x3, y3, color)
-    status: not_implemented
+    status: implemented
     notes: Triangle
   - key: aatrigon
     label: aatrigon(surface, x1, y1, x2, y2, x3, y3, color)
-    status: not_implemented
+    status: implemented
     notes: AA triangle
   - key: filled_trigon
     label: filled_trigon(surface, x1, y1, x2, y2, x3, y3, color)
-    status: not_implemented
+    status: implemented
     notes: Filled triangle
   - key: polygon
     label: polygon(surface, points, color)
-    status: not_implemented
+    status: implemented
     notes: Polygon outline
   - key: aapolygon
     label: aapolygon(surface, points, color)
-    status: not_implemented
+    status: implemented
     notes: AA polygon
   - key: filled_polygon
     label: filled_polygon(surface, points, color)
-    status: not_implemented
+    status: implemented
     notes: Filled polygon
   - key: textured_polygon
     label: textured_polygon(surface, points, texture, tx, ty)
-    status: not_implemented
+    status: implemented
     notes: Textured polygon
   - key: bezier
     label: bezier(surface, points, steps, color)
-    status: not_implemented
+    status: implemented
     notes: Bezier curve
 - title: pygame.surfarray
   table_label: Function
@@ -1611,24 +1611,24 @@ sections:
     notes: 3D view (writable)
   - key: array_alpha
     label: array_alpha(surface)
-    status: not_implemented
-    notes: Alpha channel array
+    status: implemented
+    notes: Returns alpha channel as 2-D array
   - key: array_colorkey
     label: array_colorkey(surface)
-    status: not_implemented
-    notes: Colorkey array
+    status: implemented
+    notes: Returns colorkey mask array
   - key: make_surface
     label: make_surface(array)
     status: implemented
     notes: Create surface from array
   - key: blit_array
     label: blit_array(surface, array)
-    status: not_implemented
-    notes: Blit array to surface
+    status: implemented
+    notes: Blits numpy array onto surface
   - key: map_array
     label: map_array(surface, array)
-    status: not_implemented
-    notes: Map colors to pixel values
+    status: implemented
+    notes: Maps RGB triples to pixel values
   - key: use_arraytype
     label: use_arraytype(arraytype)
     status: not_implemented
@@ -1646,19 +1646,19 @@ sections:
   items:
   - key: surface_to_array
     label: surface_to_array(array, surface, kind, opaque, ...)
-    status: not_implemented
-    notes: Fast surface to array copy
+    status: implemented
+    notes: Fast surface-to-array copy
   - key: array_to_surface
     label: array_to_surface(surface, array)
-    status: not_implemented
-    notes: Fast array to surface copy
+    status: implemented
+    notes: Fast array-to-surface copy
   - key: map_array
     label: map_array(surface, array3d, array2d)
-    status: not_implemented
-    notes: Map RGB to pixel values
+    status: implemented
+    notes: Map RGB triples to pixel values
   - key: make_surface
     label: make_surface(array)
-    status: not_implemented
+    status: implemented
     notes: Create surface from array
 - title: pygame.mixer
   table_label: Item
@@ -1669,203 +1669,203 @@ sections:
     notes: Notes
   - key: mixer.init
     label: mixer.init(...)
-    status: not_applicable
-    notes: Audio initialization
+    status: implemented
+    notes: mixer.init(frequency, size, channels, buffer, devicename, allowedchanges)
   - key: mixer.pre_init
     label: mixer.pre_init(...)
-    status: not_applicable
-    notes: Pre-initialize mixer
+    status: implemented
+    notes: Pre-initialize mixer settings
   - key: mixer.quit
     label: mixer.quit()
-    status: not_applicable
+    status: implemented
     notes: Uninitialize mixer
   - key: mixer.get_init
     label: mixer.get_init()
-    status: not_applicable
-    notes: Get audio settings
+    status: implemented
+    notes: Returns (frequency, size, channels) tuple
   - key: mixer.stop
     label: mixer.stop()
-    status: not_applicable
-    notes: Stop all channels
+    status: implemented
+    notes: Stop all active channels
   - key: mixer.pause
     label: mixer.pause()
-    status: not_applicable
-    notes: Pause all channels
+    status: implemented
+    notes: Pause all active channels
   - key: mixer.unpause
     label: mixer.unpause()
-    status: not_applicable
-    notes: Unpause all channels
+    status: implemented
+    notes: Unpause all paused channels
   - key: mixer.fadeout
     label: mixer.fadeout(time)
-    status: not_applicable
-    notes: Fade out all sounds
+    status: implemented
+    notes: Fade out all sounds over given time
   - key: mixer.set_num_channels
     label: mixer.set_num_channels(count)
-    status: not_applicable
-    notes: Set channel count
+    status: implemented
+    notes: Set number of playback channels
   - key: mixer.get_num_channels
     label: mixer.get_num_channels()
-    status: not_applicable
-    notes: Get channel count
+    status: implemented
+    notes: Get number of playback channels
   - key: mixer.set_reserved
     label: mixer.set_reserved(count)
-    status: not_applicable
-    notes: Reserve channels
+    status: implemented
+    notes: Reserve channels (stored, no-op)
   - key: mixer.find_channel
     label: mixer.find_channel(force)
-    status: not_applicable
-    notes: Find available channel
+    status: implemented
+    notes: Find an idle channel
   - key: mixer.get_busy
     label: mixer.get_busy()
-    status: not_applicable
-    notes: Check if any sound playing
+    status: implemented
+    notes: True if any channel is playing
   - key: Sound
     label: Sound(file)
-    status: not_applicable
-    notes: Sound object
+    status: implemented
+    notes: Sound(file/buffer) — HTML5 audio element
   - key: Sound.play
     label: Sound.play(loops, maxtime, fade_ms)
-    status: not_applicable
-    notes: Play sound
+    status: implemented
+    notes: Play sound, returns Channel
   - key: Sound.stop
     label: Sound.stop()
-    status: not_applicable
-    notes: Stop sound
+    status: implemented
+    notes: Stop sound on all channels
   - key: Sound.fadeout
     label: Sound.fadeout(time)
-    status: not_applicable
-    notes: Fade out sound
+    status: implemented
+    notes: Fade out and stop sound
   - key: Sound.set_volume
     label: Sound.set_volume(value)
-    status: not_applicable
-    notes: Set volume
+    status: implemented
+    notes: Set playback volume (0.0–1.0)
   - key: Sound.get_volume
     label: Sound.get_volume()
-    status: not_applicable
-    notes: Get volume
+    status: implemented
+    notes: Get playback volume
   - key: Sound.get_num_channels
     label: Sound.get_num_channels()
-    status: not_applicable
-    notes: Active channels
+    status: implemented
+    notes: Number of channels playing this sound
   - key: Sound.get_length
     label: Sound.get_length()
-    status: not_applicable
-    notes: Sound duration
+    status: implemented
+    notes: Duration in seconds
   - key: Channel
     label: Channel(id)
-    status: not_applicable
-    notes: Channel object
+    status: implemented
+    notes: Channel(id) — wraps HTML5 audio element
   - key: Channel.play
     label: Channel.play(sound, ...)
-    status: not_applicable
-    notes: Play on channel
+    status: implemented
+    notes: Play sound on this channel
   - key: Channel.stop
     label: Channel.stop()
-    status: not_applicable
+    status: implemented
     notes: Stop channel
   - key: Channel.pause
     label: Channel.pause()
-    status: not_applicable
+    status: implemented
     notes: Pause channel
   - key: Channel.unpause
     label: Channel.unpause()
-    status: not_applicable
+    status: implemented
     notes: Unpause channel
   - key: Channel.fadeout
     label: Channel.fadeout(time)
-    status: not_applicable
+    status: implemented
     notes: Fade out channel
   - key: Channel.set_volume
     label: Channel.set_volume(left, right)
-    status: not_applicable
+    status: implemented
     notes: Set channel volume
   - key: Channel.get_volume
     label: Channel.get_volume()
-    status: not_applicable
+    status: implemented
     notes: Get channel volume
   - key: Channel.get_busy
     label: Channel.get_busy()
-    status: not_applicable
-    notes: Check if playing
+    status: implemented
+    notes: True if channel is active
   - key: Channel.get_sound
     label: Channel.get_sound()
-    status: not_applicable
-    notes: Get current sound
+    status: implemented
+    notes: Get current Sound object
   - key: Channel.queue
     label: Channel.queue(sound)
-    status: not_applicable
-    notes: Queue sound
+    status: implemented
+    notes: Queue next sound
   - key: Channel.get_queue
     label: Channel.get_queue()
-    status: not_applicable
+    status: implemented
     notes: Get queued sound
 - title: pygame.mixer.music
   table_label: Function
   items:
   - key: music.load
     label: music.load(file)
-    status: not_applicable
-    notes: Load music file
+    status: implemented
+    notes: Load music file as HTML5 audio
   - key: music.unload
     label: music.unload()
-    status: not_applicable
-    notes: Unload music
+    status: implemented
+    notes: Unload current music
   - key: music.play
     label: music.play(loops, start, fade_ms)
-    status: not_applicable
-    notes: Play music
+    status: implemented
+    notes: Play music (loops, start, fade_ms)
   - key: music.rewind
     label: music.rewind()
-    status: not_applicable
-    notes: Restart music
+    status: implemented
+    notes: Restart music from beginning
   - key: music.stop
     label: music.stop()
-    status: not_applicable
+    status: implemented
     notes: Stop music
   - key: music.pause
     label: music.pause()
-    status: not_applicable
+    status: implemented
     notes: Pause music
   - key: music.unpause
     label: music.unpause()
-    status: not_applicable
+    status: implemented
     notes: Unpause music
   - key: music.fadeout
     label: music.fadeout(time)
-    status: not_applicable
-    notes: Fade out music
+    status: implemented
+    notes: Fade out and stop music over given time
   - key: music.set_volume
     label: music.set_volume(volume)
-    status: not_applicable
-    notes: Set volume
+    status: implemented
+    notes: Set music volume (0.0–1.0)
   - key: music.get_volume
     label: music.get_volume()
-    status: not_applicable
-    notes: Get volume
+    status: implemented
+    notes: Get current music volume
   - key: music.get_busy
     label: music.get_busy()
-    status: not_applicable
-    notes: Check if playing
+    status: implemented
+    notes: True if music is playing
   - key: music.set_pos
     label: music.set_pos(pos)
-    status: not_applicable
-    notes: Set position
+    status: implemented
+    notes: Seek to position in seconds
   - key: music.get_pos
     label: music.get_pos()
-    status: not_applicable
-    notes: Get position
+    status: implemented
+    notes: Get current playback position (ms)
   - key: music.queue
     label: music.queue(file)
-    status: not_applicable
-    notes: Queue next music
+    status: implemented
+    notes: Queue next music file
   - key: music.set_endevent
     label: music.set_endevent(type)
-    status: not_applicable
-    notes: Set end event
+    status: implemented
+    notes: Post event when music ends
   - key: music.get_endevent
     label: music.get_endevent()
-    status: not_applicable
-    notes: Get end event
+    status: implemented
+    notes: Get end event type
 - title: pygame.joystick
   table_label: Item
   items:
@@ -2446,19 +2446,15 @@ sections:
   - key: "\u2705 Fully Implemented"
     label: "\u2705 Fully Implemented"
     status: not_implemented
-    notes: 45.2%
-  - key: "\U0001F536 Partially Implemented"
-    label: "\U0001F536 Partially Implemented"
-    status: not_implemented
-    notes: 6.9%
+    notes: "69.1%"
   - key: "\u274C Not Implemented"
     label: "\u274C Not Implemented"
     status: not_implemented
-    notes: 24.0%
+    notes: "27.0%"
   - key: "\U0001F6AB Not Applicable"
     label: "\U0001F6AB Not Applicable (Jupyter limitations)"
     status: not_implemented
-    notes: 24.0%
+    notes: "3.9%"
   - key: Category
     label: Category
     status: not_implemented
@@ -2486,7 +2482,7 @@ sections:
   - key: Fonts
     label: Fonts
     status: not_implemented
-    notes: "\U0001F536 Good"
+    notes: "\u2705 Good"
   - key: Images & Transform
     label: Images & Transform
     status: not_implemented
@@ -2502,15 +2498,15 @@ sections:
   - key: Math
     label: Math (Vector2/3)
     status: not_implemented
-    notes: "\U0001F536 Fair"
+    notes: "\u2705 Good"
   - key: Masks
     label: Masks
     status: not_implemented
-    notes: "\U0001F536 Limited"
+    notes: "\u2705 Good"
   - key: Audio
     label: Audio (mixer, music, sndarray)
     status: not_implemented
-    notes: "\U0001F6AB N/A"
+    notes: "\U0001F536 Partial (mixer/music implemented; sndarray stub)"
   - key: Joystick
     label: Joystick
     status: not_implemented
