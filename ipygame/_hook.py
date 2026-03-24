@@ -22,6 +22,8 @@ _SUBMODULE_MAP = {
     "pygame.mask":       "ipygame.mask",
     "pygame.math":       "ipygame.math",
     "pygame.midi":       "ipygame.midi",
+    "pygame.mixer":      "ipygame.mixer",
+    "pygame.mixer.music": "ipygame.mixer",
     "pygame.mouse":      "ipygame.mouse",
     "pygame.pixelcopy":  "ipygame.pixelcopy",
     "pygame.rect":       "ipygame.rect",

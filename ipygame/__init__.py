@@ -36,6 +36,7 @@ from ipygame import (
     freetype,
     ftfont,
     midi,
+    mixer,
     sndarray,
     sprite,
 )
