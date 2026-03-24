@@ -35,6 +35,12 @@ jobs:
       - name: Install Python deps
         run: uv sync --group dev
 
+      - name: Ensure pip in uv env
+        run: uv run python -m ensurepip --upgrade
+
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v2
+
       - name: Install docs deps
         working-directory: docs
         run: bun install --frozen-lockfile

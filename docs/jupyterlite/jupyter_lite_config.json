@@ -4,6 +4,6 @@
     "enableMemoryCache": true
   },
   "jupyter-config-data": {
-    "defaultKernelName": "python"
+    "defaultKernelName": "xpython"
   }
 }
