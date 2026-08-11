@@ -8,6 +8,18 @@ from typing import Iterator, Self, Sequence
 __all__ = ["Rect", "FRect"]
 
 
+def _half(v: int) -> int:
+    """Halve *v* rounding toward zero.
+
+    pygame halves the inflate amount with C integer division, which truncates
+    toward zero. Python's ``//`` floors instead, which is off by one for odd
+    negative amounts -- that is, whenever a rect is shrunk by an odd number of
+    pixels.
+    """
+    v = int(v)
+    return -(-v // 2) if v < 0 else v // 2
+
+
 def _parse_rect_args(args) -> tuple:
     """Return (x, y, w, h) from the flexible overloads pygame supports."""
     if len(args) == 1:
@@ -242,12 +254,12 @@ class Rect:
         return r
 
     def inflate(self, x: int, y: int) -> Rect:
-        return Rect(self._x - int(x) // 2, self._y - int(y) // 2,
+        return Rect(self._x - _half(x), self._y - _half(y),
                      self._w + int(x), self._h + int(y))
 
     def inflate_ip(self, x: int, y: int) -> None:
-        self._x -= int(x) // 2
-        self._y -= int(y) // 2
+        self._x -= _half(x)
+        self._y -= _half(y)
         self._w += int(x)
         self._h += int(y)
 
