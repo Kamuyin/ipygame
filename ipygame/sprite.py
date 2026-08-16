@@ -113,6 +113,137 @@ RenderClear = Group
 GroupSingle = Group
 
 
+def collide_rect(left: Sprite, right: Sprite) -> bool:
+    """Detect collision between two sprites using their ``rect``.
+
+    Meant to be passed as the ``collided`` argument of ``spritecollide``,
+    ``groupcollide`` and ``spritecollideany``, where it is also the default.
+    """
+    return left.rect.colliderect(right.rect)
+
+
+class collide_rect_ratio:
+    """Rect collision after scaling both rects about their centres.
+
+    A ratio above 1.0 enlarges the collision boxes, below 1.0 shrinks them.
+    Construct once and reuse as a ``collided`` argument::
+
+        spritecollide(player, walls, False, collide_rect_ratio(0.75))
+    """
+
+    def __init__(self, ratio: float) -> None:
+        self.ratio = ratio
+
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}({self.ratio})>"
+
+    def __call__(self, left: Sprite, right: Sprite) -> bool:
+        ratio = self.ratio
+
+        leftrect = left.rect
+        width = leftrect.width
+        height = leftrect.height
+        leftrect = leftrect.inflate(width * ratio - width, height * ratio - height)
+
+        rightrect = right.rect
+        width = rightrect.width
+        height = rightrect.height
+        rightrect = rightrect.inflate(width * ratio - width, height * ratio - height)
+
+        return leftrect.colliderect(rightrect)
+
+
+def collide_circle(left: Sprite, right: Sprite) -> bool:
+    """Detect collision between two sprites using their bounding circles.
+
+    Each circle is centred on the sprite's ``rect``. Its radius is the sprite's
+    ``radius`` attribute if it has one, otherwise half the rect diagonal -- a
+    computed radius is cached on the sprite for the next call.
+    """
+    xdistance = left.rect.centerx - right.rect.centerx
+    ydistance = left.rect.centery - right.rect.centery
+    distancesquared = xdistance**2 + ydistance**2
+
+    if hasattr(left, "radius"):
+        leftradius = left.radius
+    else:
+        leftrect = left.rect
+        leftradius = ((leftrect.width**2 + leftrect.height**2) ** 0.5) * 0.5
+        # store the radius on the sprite for next time
+        left.radius = leftradius
+
+    if hasattr(right, "radius"):
+        rightradius = right.radius
+    else:
+        rightrect = right.rect
+        rightradius = ((rightrect.width**2 + rightrect.height**2) ** 0.5) * 0.5
+        right.radius = rightradius
+
+    return distancesquared <= (leftradius + rightradius) ** 2
+
+
+class collide_circle_ratio:
+    """Bounding-circle collision with both radii scaled by a ratio.
+
+    Like :func:`collide_circle`, but multiplies both radii by *ratio* before
+    testing. Only the unscaled radius is cached on the sprite, so the same
+    sprites can be tested with different ratios.
+    """
+
+    def __init__(self, ratio: float) -> None:
+        self.ratio = ratio
+
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__}({self.ratio})>"
+
+    def __call__(self, left: Sprite, right: Sprite) -> bool:
+        ratio = self.ratio
+
+        xdistance = left.rect.centerx - right.rect.centerx
+        ydistance = left.rect.centery - right.rect.centery
+        distancesquared = xdistance**2 + ydistance**2
+
+        if hasattr(left, "radius"):
+            leftradius = left.radius
+        else:
+            leftrect = left.rect
+            leftradius = ((leftrect.width**2 + leftrect.height**2) ** 0.5) * 0.5
+            left.radius = leftradius
+        leftradius *= ratio
+
+        if hasattr(right, "radius"):
+            rightradius = right.radius
+        else:
+            rightrect = right.rect
+            rightradius = ((rightrect.width**2 + rightrect.height**2) ** 0.5) * 0.5
+            right.radius = rightradius
+        rightradius *= ratio
+
+        return distancesquared <= (leftradius + rightradius) ** 2
+
+
+def collide_mask(left: Sprite, right: Sprite):
+    """Detect collision between two sprites using their masks (pixel perfect).
+
+    Each sprite's mask is its ``mask`` attribute if it has one, otherwise one
+    built from ``sprite.image`` with ``ipygame.mask.from_surface``. Returns the
+    first overlapping point in *left*'s mask coordinates, or ``None``.
+    """
+    from ipygame.mask import from_surface
+
+    xoffset = right.rect.x - left.rect.x
+    yoffset = right.rect.y - left.rect.y
+    try:
+        leftmask = left.mask
+    except AttributeError:
+        leftmask = from_surface(left.image)
+    try:
+        rightmask = right.mask
+    except AttributeError:
+        rightmask = from_surface(right.image)
+    return leftmask.overlap(rightmask, (xoffset, yoffset))
+
+
 def groupcollide(
     group1: Group,
     group2: Group,
