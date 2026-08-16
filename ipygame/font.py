@@ -132,22 +132,33 @@ class Font:
     """TrueType font rendering using Pillow."""
 
     def __init__(self, filename: str | Path | None = None, size: int = 20):
-        from PIL import ImageFont
-
         self._size = max(1, int(size))
+        self._filename = filename
         self._bold = False
         self._italic = False
         self._underline = False
         self._strikethrough = False
         self._align = 0  # LEFT
 
-        if filename is None:
+        self._font = self._load_font(self._size)
+
+    def _load_font(self, size: int):
+        """Load the Pillow font backing this Font at *size*."""
+        from PIL import ImageFont
+
+        if self._filename is not None:
+            return ImageFont.truetype(str(self._filename), size)
+
+        try:
+            return ImageFont.truetype("arial.ttf", size)
+        except (OSError, IOError):
             try:
-                self._font = ImageFont.truetype("arial.ttf", self._size)
-            except (OSError, IOError):
-                self._font = ImageFont.load_default()
-        else:
-            self._font = ImageFont.truetype(str(filename), self._size)
+                # Pillow >= 10.1 can scale its built-in font to a size. Before
+                # that, the default font is a fixed ~10px bitmap font and the
+                # requested size cannot be honoured.
+                return ImageFont.load_default(size)
+            except TypeError:
+                return ImageFont.load_default()
 
     @property
     def name(self) -> str:
@@ -198,10 +209,8 @@ class Font:
     @point_size.setter
     def point_size(self, value: int):
         self._size = max(1, int(value))
-        from PIL import ImageFont
         try:
-            path = self._font.path
-            self._font = ImageFont.truetype(path, self._size)
+            self._font = self._load_font(self._size)
         except (AttributeError, OSError):
             pass
 
