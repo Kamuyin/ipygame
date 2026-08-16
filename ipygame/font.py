@@ -238,12 +238,34 @@ class Font:
     def get_strikethrough(self) -> bool:
         return self._strikethrough
 
+    def _layout(self, lines: list[str]) -> tuple[int, int, int]:
+        """Surface geometry for *lines*: (width, height, first baseline offset).
+
+        Pillow draws text from the ascender line, so the surface has to cover
+        the full ascender-to-descender band -- extended by any ink that pokes
+        outside it -- rather than the tight bounding box of the particular
+        string being drawn. The third value is the y coordinate the first line
+        must be drawn at for none of that ink to fall outside the surface.
+        """
+        boxes = [self._font.getbbox(line) or (0, 0, 0, 0) for line in lines]
+        linesize = self.get_linesize()
+        try:
+            ascent, descent = self._font.getmetrics()
+        except AttributeError:  # bitmap font, no FreeType metrics available
+            ascent, descent = self.get_height(), 0
+
+        width = max((box[2] for box in boxes), default=0)
+        top = min([0] + [box[1] for box in boxes])
+        bottom = max(
+            i * linesize + max(ascent + descent, box[3])
+            for i, box in enumerate(boxes)
+        )
+        return (max(width, 0), max(bottom - top, 1), -top)
+
     def size(self, text: str) -> tuple[int, int]:
-        """Get the rendered dimensions of *text*."""
-        bbox = self._font.getbbox(text)
-        if bbox is None:
-            return (0, self.get_height())
-        return (bbox[2] - bbox[0], bbox[3] - bbox[1])
+        """Get the dimensions ``render`` would produce for *text*."""
+        w, h, _ = self._layout([text])
+        return (w, h)
 
     def get_height(self) -> int:
         """Font height in pixels."""
@@ -316,16 +338,13 @@ class Font:
 
         if wraplength > 0:
             lines = self._wrap_text(text, wraplength)
-            text_to_measure = max(lines, key=lambda l: self.size(l)[0])
-            tw, th = self.size(text_to_measure)
-            total_h = self.get_linesize() * len(lines)
         else:
             lines = [text]
-            tw, th = self.size(text)
-            total_h = th
 
-        iw = max(tw + 2, 1)
-        ih = max(total_h + 2, 1)
+        tw, total_h, y_start = self._layout(lines)
+
+        iw = max(tw, 1)
+        ih = max(total_h, 1)
 
         if bgcolor is not None:
             bg = Color(bgcolor) if not isinstance(bgcolor, Color) else bgcolor
@@ -335,17 +354,17 @@ class Font:
 
         draw = ImageDraw.Draw(img)
 
-        y_offset = 0
+        y_offset = y_start
         for line in lines:
             draw.text((0, y_offset), line, font=self._font, fill=fg)
             y_offset += self.get_linesize()
 
         if self._underline:
-            y_line = y_offset - 2
+            y_line = min(ih - 1, y_offset - 2)
             draw.line([(0, y_line), (iw, y_line)], fill=fg, width=1)
 
         if self._strikethrough:
-            y_line = total_h // 2
+            y_line = ih // 2
             draw.line([(0, y_line), (iw, y_line)], fill=fg, width=1)
 
         arr = np.array(img, dtype=np.uint8)
