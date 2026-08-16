@@ -254,7 +254,9 @@ class Font:
         except AttributeError:  # bitmap font, no FreeType metrics available
             ascent, descent = self.get_height(), 0
 
-        width = max((box[2] for box in boxes), default=0)
+        left = min([0] + [box[0] for box in boxes])
+        right = max([0] + [box[2] for box in boxes])
+        width = right - left
         top = min([0] + [box[1] for box in boxes])
         bottom = max(
             i * linesize + max(ascent + descent, box[3])
@@ -342,6 +344,12 @@ class Font:
             lines = [text]
 
         tw, total_h, y_start = self._layout(lines)
+        x_start = -min(
+            [0] + [
+                (self._font.getbbox(line) or (0, 0, 0, 0))[0]
+                for line in lines
+            ]
+        )
 
         iw = max(tw, 1)
         ih = max(total_h, 1)
@@ -356,7 +364,7 @@ class Font:
 
         y_offset = y_start
         for line in lines:
-            draw.text((0, y_offset), line, font=self._font, fill=fg)
+            draw.text((x_start, y_offset), line, font=self._font, fill=fg)
             y_offset += self.get_linesize()
 
         if self._underline:
